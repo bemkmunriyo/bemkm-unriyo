@@ -561,7 +561,7 @@ Route::middleware([
 
 Route::middleware([
     'auth',
-    'role:super_admin'
+    'role:superadmin'
 ])
 ->prefix('superadmin')
 ->name('superadmin.')
@@ -577,8 +577,6 @@ Route::middleware([
         '/dashboard',
         [DashboardController::class, 'index']
     )->name('dashboard');
-
-
 
     /*
 |--------------------------------------------------------------------------
