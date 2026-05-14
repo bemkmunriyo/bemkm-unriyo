@@ -10,33 +10,23 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('peminjaman_inventaris', function (Blueprint $table) {
+    {
+        Schema::table('peminjaman_inventaris', function (Blueprint $table) {
+            $table->enum('status', [
+                'pending',
+                'disetujui',
+                'ditolak'
+            ])->default('pending');
+        });
+    }
 
-        $table->id();
-
-        $table->foreignId('user_id')
-            ->constrained()
-            ->onDelete('cascade');
-
-        $table->string('nama_barang');
-
-        $table->integer('jumlah');
-
-        $table->date('tanggal_pinjam');
-
-        $table->date('tanggal_kembali');
-
-        $table->enum('status', [
-
-            'pending',
-            'disetujui',
-            'ditolak'
-
-        ])->default('pending');
-
-        $table->timestamps();
-
-    });
-}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('peminjaman_inventaris', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
+    }
 };
