@@ -164,8 +164,38 @@
         </a>
 
     </div>
+    
 
-</aside>
+    <!-- LOGOUT -->
+  <form method="POST"
+      action="{{ route('logout') }}"
+      class="pt-5 mt-5 border-t border-white/10">
+
+    @csrf
+
+    <button type="submit"
+            class="w-full flex items-center gap-3
+                   px-4 py-3
+                   rounded-xl
+                   bg-red-500/90
+                   hover:bg-red-600
+                   transition-all duration-300">
+
+        <!-- ICON -->
+        <span class="text-base">
+            ⎋
+        </span>
+
+        <!-- TEXT -->
+        <span class="text-sm font-semibold">
+            Logout
+        </span>
+
+    </button>
+
+</form>
+
+    </aside>
 
 <!-- OVERLAY -->
 <div id="overlay"

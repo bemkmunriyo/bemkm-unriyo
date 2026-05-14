@@ -54,7 +54,7 @@ class AuthenticatedSessionController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if ($user->role == 'superadmin') {
+        if ($user->role == 'super_admin') {
 
             return redirect()->route('superadmin.dashboard');
 
@@ -66,7 +66,7 @@ class AuthenticatedSessionController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if ($user->role == 'bem') {
+        if ($user->role == 'bemkm') {
 
             return redirect()->route('bemkm.dashboard');
 
@@ -79,10 +79,8 @@ class AuthenticatedSessionController extends Controller
         */
 
         if ($user->role == 'dpm') {
-
-            return redirect()->route('dpmkm.dashboard');
-
-        }
+    return redirect('/dpmkm/dashboard');
+}
 
         /*
         |--------------------------------------------------------------------------

@@ -133,7 +133,7 @@ class AkunController extends Controller
         ->with('success', 'Akun berhasil diupdate');
 }
 
-    /*
+        /*
     |--------------------------------------------------------------------------
     | DELETE
     |--------------------------------------------------------------------------
@@ -142,6 +142,19 @@ class AkunController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | CEGAH HAPUS AKUN SENDIRI
+        |--------------------------------------------------------------------------
+        */
+
+        if ($user->id == auth()->id()) {
+
+            return back()
+                ->with('error', 'Tidak bisa menghapus akun sendiri');
+
+        }
 
         $user->delete();
 

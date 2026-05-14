@@ -10,12 +10,15 @@ class Lpj extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'judul',
-        'deskripsi',
-        'file',
-        'status',
-    ];
+
+    'user_id',
+    'judul',
+    'deskripsi',
+    'tanggal',
+    'file',
+    'status',
+
+];
 
     /*
     |--------------------------------------------------------------------------

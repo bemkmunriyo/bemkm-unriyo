@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Bemkm;
 
 use App\Http\Controllers\Controller;
 use App\Models\Proposal;
+use Illuminate\Http\Request;
 
 class ProposalController extends Controller
 {
@@ -14,25 +15,52 @@ class ProposalController extends Controller
     */
 
     public function index()
-    {
-        $proposals = Proposal::latest()->get();
+{
+    /*
+    |--------------------------------------------------------------------------
+    | DATA PROPOSAL
+    |--------------------------------------------------------------------------
+    */
 
-        $totalProposal = Proposal::count();
+    $proposals = Proposal::latest()->get();
 
-        $pendingProposal = Proposal::where('status', 'Pending')->count();
+    /*
+    |--------------------------------------------------------------------------
+    | STATISTIK
+    |--------------------------------------------------------------------------
+    */
 
-        $approvedProposal = Proposal::where('status', 'Disetujui')->count();
+    $totalProposal = Proposal::count();
 
-        $rejectedProposal = Proposal::whereIn('status', ['Ditolak', 'Revisi'])->count();
+    $pendingProposal = Proposal::where(
+        'status',
+        'Pending'
+    )->count();
 
-        return view('bemkm.proposal.index', compact(
-            'proposals',
-            'totalProposal',
-            'pendingProposal',
-            'approvedProposal',
-            'rejectedProposal'
-        ));
-    }
+    $approvedProposal = Proposal::where(
+        'status',
+        'Disetujui'
+    )->count();
+
+    $rejectedProposal = Proposal::where(
+        'status',
+        'Ditolak'
+    )->count();
+
+    /*
+    |--------------------------------------------------------------------------
+    | RETURN VIEW
+    |--------------------------------------------------------------------------
+    */
+
+    return view('bemkm.proposal.index', compact(
+        'proposals',
+        'totalProposal',
+        'pendingProposal',
+        'approvedProposal',
+        'rejectedProposal'
+    ));
+}
 
     /*
     |--------------------------------------------------------------------------
@@ -43,5 +71,90 @@ class ProposalController extends Controller
     public function create()
     {
         return view('bemkm.proposal.create');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STORE PROPOSAL
+    |--------------------------------------------------------------------------
+    */
+
+    public function store(Request $request)
+    {
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDASI
+        |--------------------------------------------------------------------------
+        */
+
+        $request->validate([
+
+            'judul' => 'required',
+
+            'deskripsi' => 'required',
+
+            'waktu_pelaksanaan' => 'required',
+
+            'nominal' => 'required',
+
+            'file' => 'required|mimes:pdf,doc,docx|max:2048',
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | UPLOAD FILE
+        |--------------------------------------------------------------------------
+        */
+
+        $fileName = null;
+
+        if ($request->hasFile('file')) {
+
+            $fileName = time() . '.' .
+                $request->file('file')->extension();
+
+            $request->file('file')->storeAs(
+                'public/proposal',
+                $fileName
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | SIMPAN DATABASE
+        |--------------------------------------------------------------------------
+        */
+
+        Proposal::create([
+
+            'judul' => $request->judul,
+
+            'deskripsi' => $request->deskripsi,
+
+            'nominal' => $request->nominal,
+
+            'waktu_pelaksanaan' => $request->waktu_pelaksanaan,
+
+            'file' => $fileName,
+
+            'status' => 'Pending',
+
+            'user_id' => auth()->id(),
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()
+            ->route('bemkm.proposal.index')
+            ->with(
+                'success',
+                'Proposal berhasil diajukan'
+            );
     }
 }

@@ -338,11 +338,14 @@
 
                         <div class="flex items-center gap-4">
 
-                            <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
+                            <div class="w-20 h-20
+            flex items-center justify-center">
 
-                                🎓
+    <img src="{{ asset('storage/logokabinet.png') }}"
+         alt="Logo UNRIYO"
+         class="w-20 h-20 object-contain">
 
-                            </div>
+</div>
 
                             <div>
 

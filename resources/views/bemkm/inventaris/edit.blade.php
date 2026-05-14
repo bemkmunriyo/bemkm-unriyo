@@ -36,7 +36,7 @@
               enctype="multipart/form-data">
 
             @csrf
-            @method('PUT')
+            
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -49,7 +49,7 @@
 
                     <input type="text"
                            name="nama_barang"
-                           value="{{ $inventaris->nama_barang }}"
+                           value="{{ old('nama_barang', $inventaris->nama_barang) }}"
                            class="w-full border border-gray-300 rounded-2xl px-5 py-4 mt-2 outline-none focus:ring-2 focus:ring-blue-200">
 
                 </div>
@@ -63,7 +63,7 @@
 
                     <input type="number"
                            name="stok"
-                           value="{{ $inventaris->stok }}"
+                           value="{{ old('stok', $inventaris->stok) }}"
                            class="w-full border border-gray-300 rounded-2xl px-5 py-4 mt-2 outline-none focus:ring-2 focus:ring-blue-200">
 
                 </div>
@@ -77,7 +77,7 @@
 
                     <input type="number"
                            name="biaya_pemeliharaan"
-                           value="{{ $inventaris->biaya_pemeliharaan }}"
+                           value="{{ old('biaya_pemeliharaan', $inventaris->biaya_pemeliharaan) }}"
                            class="w-full border border-gray-300 rounded-2xl px-5 py-4 mt-2 outline-none focus:ring-2 focus:ring-blue-200">
 
                 </div>
@@ -156,7 +156,7 @@
 
                 <textarea name="deskripsi"
                           rows="5"
-                          class="w-full border border-gray-300 rounded-2xl px-5 py-4 mt-2 outline-none focus:ring-2 focus:ring-blue-200">{{ $inventaris->deskripsi }}</textarea>
+                          class="w-full border border-gray-300 rounded-2xl px-5 py-4 mt-2 outline-none focus:ring-2 focus:ring-blue-200">{{ old('deskripsi', $inventaris->deskripsi) }}</textarea>
 
             </div>
 

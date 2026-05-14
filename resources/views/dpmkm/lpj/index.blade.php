@@ -8,24 +8,12 @@
     <div>
 
         <h1 class="text-3xl font-bold text-[#041C64]">
-            Pengajuan LPJ DPM KM
+            LPJ DPM KM
         </h1>
 
         <p class="text-gray-500 mt-2">
-            Kelola laporan pertanggungjawaban kegiatan DPM KM kepada BEM KM.
+            Data laporan pertanggungjawaban kegiatan organisasi mahasiswa.
         </p>
-
-    </div>
-
-    <!-- BUTTON -->
-    <div class="flex items-center gap-4">
-
-        <button
-            class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-6 py-3 rounded-2xl font-semibold shadow-sm transition">
-
-            + Upload LPJ
-
-        </button>
 
     </div>
 
@@ -44,7 +32,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-[#041C64]">
-                10
+                {{ $totalLpj }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
@@ -67,7 +55,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-green-500">
-                6
+                {{ $lpjDisetujui }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
@@ -90,7 +78,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-yellow-500">
-                2
+                {{ $lpjRevisi }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-2xl">
@@ -113,7 +101,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-blue-500">
-                2
+                {{ $lpjMenunggu }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">
@@ -128,59 +116,6 @@
 
 </div>
 
-<!-- FILTER -->
-<div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-8">
-
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-
-        <!-- SEARCH -->
-        <div class="md:col-span-2">
-
-            <label class="block text-sm font-semibold text-gray-700 mb-3">
-                Cari LPJ
-            </label>
-
-            <input type="text"
-                   placeholder="Cari nama kegiatan..."
-                   class="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-blue-200">
-
-        </div>
-
-        <!-- STATUS -->
-        <div>
-
-            <label class="block text-sm font-semibold text-gray-700 mb-3">
-                Status LPJ
-            </label>
-
-            <select
-                class="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-blue-200">
-
-                <option>Semua Status</option>
-                <option>Disetujui</option>
-                <option>Menunggu Verifikasi</option>
-                <option>Revisi</option>
-
-            </select>
-
-        </div>
-
-        <!-- BUTTON -->
-        <div class="flex items-end">
-
-            <button
-                class="w-full bg-[#041C64] hover:bg-[#02113D] text-white py-4 rounded-2xl font-semibold transition">
-
-                Filter Data
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
 <!-- TABLE -->
 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
 
@@ -188,11 +123,11 @@
     <div class="px-6 py-5 border-b border-gray-100">
 
         <h2 class="text-2xl font-bold text-[#041C64]">
-            Daftar LPJ DPM KM
+            Daftar LPJ
         </h2>
 
         <p class="text-sm text-gray-500 mt-1">
-            Riwayat laporan pertanggungjawaban kegiatan kepada BEM KM
+            Riwayat LPJ organisasi mahasiswa
         </p>
 
     </div>
@@ -211,11 +146,11 @@
                     </th>
 
                     <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Anggaran Realisasi
+                        Realisasi Dana
                     </th>
 
                     <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Tanggal Upload
+                        Tanggal
                     </th>
 
                     <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
@@ -223,10 +158,10 @@
                     </th>
 
                     <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Catatan BEM KM
+                        Catatan
                     </th>
 
-                    <th class="text-center px-6 py-4 text-sm font-semibold text-gray-500">
+                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
                         Aksi
                     </th>
 
@@ -236,7 +171,8 @@
 
             <tbody>
 
-                <!-- ROW -->
+                @forelse($lpjs as $lpj)
+
                 <tr class="border-t hover:bg-gray-50 transition">
 
                     <!-- KEGIATAN -->
@@ -245,33 +181,39 @@
                         <div>
 
                             <h3 class="font-semibold text-[#041C64] text-lg">
-                                Rapat Kerja DPM KM
+
+                                {{ $lpj->judul_kegiatan }}
+
                             </h3>
 
                             <p class="text-sm text-gray-500 mt-1">
-                                LPJ program kerja tahunan organisasi
+
+                                {{ $lpj->deskripsi }}
+
                             </p>
 
                         </div>
 
                     </td>
 
-                    <!-- ANGGARAN -->
+                    <!-- DANA -->
                     <td class="px-6 py-5 font-semibold text-[#041C64]">
 
-                        Rp 4.850.000
+                        Rp {{ number_format($lpj->realisasi_dana, 0, ',', '.') }}
 
                     </td>
 
                     <!-- TANGGAL -->
                     <td class="px-6 py-5 text-gray-500">
 
-                        10 Mei 2026
+                        {{ $lpj->created_at->format('d M Y') }}
 
                     </td>
 
                     <!-- STATUS -->
                     <td class="px-6 py-5">
+
+                        @if($lpj->status == 'disetujui')
 
                         <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
 
@@ -279,69 +221,7 @@
 
                         </span>
 
-                    </td>
-
-                    <!-- CATATAN -->
-                    <td class="px-6 py-5 text-gray-600">
-
-                        LPJ telah diverifikasi dan diterima.
-
-                    </td>
-
-                    <!-- AKSI -->
-                    <td class="px-6 py-5">
-
-                        <div class="flex items-center justify-center gap-3">
-
-                            <button
-                                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
-
-                                Detail
-
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-                <!-- ROW -->
-                <tr class="border-t hover:bg-gray-50 transition">
-
-                    <!-- KEGIATAN -->
-                    <td class="px-6 py-5">
-
-                        <div>
-
-                            <h3 class="font-semibold text-[#041C64] text-lg">
-                                Seminar Legislasi Mahasiswa
-                            </h3>
-
-                            <p class="text-sm text-gray-500 mt-1">
-                                LPJ seminar organisasi mahasiswa
-                            </p>
-
-                        </div>
-
-                    </td>
-
-                    <!-- ANGGARAN -->
-                    <td class="px-6 py-5 font-semibold text-[#041C64]">
-
-                        Rp 6.900.000
-
-                    </td>
-
-                    <!-- TANGGAL -->
-                    <td class="px-6 py-5 text-gray-500">
-
-                        08 Mei 2026
-
-                    </td>
-
-                    <!-- STATUS -->
-                    <td class="px-6 py-5">
+                        @elseif($lpj->status == 'revisi')
 
                         <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-semibold">
 
@@ -349,32 +229,133 @@
 
                         </span>
 
+                        @elseif($lpj->status == 'ditolak')
+
+                        <span class="bg-red-100 text-red-700 px-4 py-2 rounded-full text-xs font-semibold">
+
+                            Ditolak
+
+                        </span>
+
+                        @else
+
+                        <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-semibold">
+
+                            Menunggu
+
+                        </span>
+
+                        @endif
+
                     </td>
 
                     <!-- CATATAN -->
                     <td class="px-6 py-5 text-gray-600">
 
-                        Lengkapi bukti pengeluaran konsumsi kegiatan.
+                        {{ $lpj->catatan ?? '-' }}
 
                     </td>
 
                     <!-- AKSI -->
                     <td class="px-6 py-5">
 
-                        <div class="flex items-center justify-center gap-3">
+                        <div class="flex flex-wrap gap-2">
 
-                            <button
-                                class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+                            <!-- SETUJUI -->
+                            <form action="{{ route('dpmkm.lpj.status', $lpj->id) }}"
+                                  method="POST">
 
-                                Revisi LPJ
+                                @csrf
 
-                            </button>
+                                <input type="hidden"
+                                       name="status"
+                                       value="disetujui">
+
+                                <button type="submit"
+                                        class="bg-green-100 hover:bg-green-200
+                                               text-green-700
+                                               px-4 py-2
+                                               rounded-xl
+                                               text-xs
+                                               font-semibold
+                                               transition">
+
+                                    Setujui
+
+                                </button>
+
+                            </form>
+
+                            <!-- REVISI -->
+                            <form action="{{ route('dpmkm.lpj.status', $lpj->id) }}"
+                                  method="POST">
+
+                                @csrf
+
+                                <input type="hidden"
+                                       name="status"
+                                       value="revisi">
+
+                                <button type="submit"
+                                        class="bg-yellow-100 hover:bg-yellow-200
+                                               text-yellow-700
+                                               px-4 py-2
+                                               rounded-xl
+                                               text-xs
+                                               font-semibold
+                                               transition">
+
+                                    Revisi
+
+                                </button>
+
+                            </form>
+
+                            <!-- TOLAK -->
+                            <form action="{{ route('dpmkm.lpj.status', $lpj->id) }}"
+                                  method="POST">
+
+                                @csrf
+
+                                <input type="hidden"
+                                       name="status"
+                                       value="ditolak">
+
+                                <button type="submit"
+                                        class="bg-red-100 hover:bg-red-200
+                                               text-red-700
+                                               px-4 py-2
+                                               rounded-xl
+                                               text-xs
+                                               font-semibold
+                                               transition">
+
+                                    Tolak
+
+                                </button>
+
+                            </form>
 
                         </div>
 
                     </td>
 
                 </tr>
+
+                @empty
+
+                <tr>
+
+                    <td colspan="6"
+                        class="text-center py-10 text-gray-500">
+
+                        Belum ada LPJ
+
+                    </td>
+
+                </tr>
+
+                @endforelse
 
             </tbody>
 

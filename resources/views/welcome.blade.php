@@ -24,7 +24,7 @@
 
             <!-- BADGE -->
            <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-sm">
-                <span class="w-2 h-2 bg-blue-700 rounded-full"></span>
+                
                 Selamat Datang di
             </div>
 
@@ -114,72 +114,103 @@
                 </div>
 
                 <!-- ITEMS -->
-                <div class="space-y-3">
+<div class="space-y-4">
 
-                    <!-- ITEM -->
-                    <div class="flex items-start gap-3 bg-slate-50 rounded-2xl p-3 hover:bg-blue-50 duration-300">
+    <!-- ASPIRASI -->
+    <a href="/aspirasi"
+       class="group flex items-start gap-4 bg-slate-50 rounded-2xl p-4 hover:bg-blue-50 hover:-translate-y-1 duration-300 border border-transparent hover:border-blue-100">
 
-                        <div class="min-w-[46px] h-[46px] rounded-xl bg-blue-100 flex items-center justify-center text-lg">
-                            💬
-                        </div>
+        <div class="min-w-[52px] h-[52px] rounded-2xl bg-blue-100 flex items-center justify-center text-2xl group-hover:scale-110 duration-300">
+            💬
+        </div>
 
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-900 mb-1">
-                                Aspirasi Mahasiswa
-                            </h3>
+        <div class="flex-1">
 
-                            <p class="text-slate-500 text-xs leading-relaxed">
-                                Penyampaian kritik dan saran mahasiswa secara digital.
-                            </p>
-                        </div>
+            <div class="flex items-center justify-between">
 
-                    </div>
+                <h3 class="font-bold text-sm text-slate-900 mb-1">
+                    Aspirasi Mahasiswa
+                </h3>
 
-                    <!-- ITEM -->
-                    <div class="flex items-start gap-3 bg-slate-50 rounded-2xl p-3 hover:bg-amber-50 duration-300">
-
-                        <div class="min-w-[46px] h-[46px] rounded-xl bg-amber-100 flex items-center justify-center text-lg">
-                            📄
-                        </div>
-
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-900 mb-1">
-                                Proposal & LPJ
-                            </h3>
-
-                            <p class="text-slate-500 text-xs leading-relaxed">
-                                Administrasi organisasi terintegrasi secara online.
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <!-- ITEM -->
-                    <div class="flex items-start gap-3 bg-slate-50 rounded-2xl p-3 hover:bg-green-50 duration-300">
-
-                        <div class="min-w-[46px] h-[46px] rounded-xl bg-green-100 flex items-center justify-center text-lg">
-                            📰
-                        </div>
-
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-900 mb-1">
-                                Informasi Kampus
-                            </h3>
-
-                            <p class="text-slate-500 text-xs leading-relaxed">
-                                Publikasi berita dan kegiatan mahasiswa terbaru.
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
+                <span class="text-blue-700 text-sm font-bold">
+                    →
+                </span>
 
             </div>
 
+            <p class="text-slate-500 text-xs leading-relaxed">
+                Sampaikan kritik, saran, dan aspirasi mahasiswa secara digital kepada BEM KM.
+            </p>
+
         </div>
 
-    </div>
+    </a>
+
+
+
+    <!-- SISTEM INFORMASI ORMAWA -->
+    <a href="{{ route('login') }}"
+       class="group flex items-start gap-4 bg-slate-50 rounded-2xl p-4 hover:bg-amber-50 hover:-translate-y-1 duration-300 border border-transparent hover:border-amber-100">
+
+        <div class="min-w-[52px] h-[52px] rounded-2xl bg-amber-100 flex items-center justify-center text-2xl group-hover:scale-110 duration-300">
+            🏢
+        </div>
+
+        <div class="flex-1">
+
+            <div class="flex items-center justify-between">
+
+                <h3 class="font-bold text-sm text-slate-900 mb-1">
+                    Sistem Informasi ORMAWA & UKM
+                </h3>
+
+                <span class="text-amber-700 text-sm font-bold">
+                    →
+                </span>
+
+            </div>
+
+            <p class="text-slate-500 text-xs leading-relaxed">
+                Akses administrasi proposal, LPJ, inventaris, dan layanan organisasi mahasiswa.
+            </p>
+
+        </div>
+
+    </a>
+
+
+
+    <!-- BERITA -->
+    <a href="{{ route('public.berita.index') }}"
+       class="group flex items-start gap-4 bg-slate-50 rounded-2xl p-4 hover:bg-green-50 hover:-translate-y-1 duration-300 border border-transparent hover:border-green-100">
+
+        <div class="min-w-[52px] h-[52px] rounded-2xl bg-green-100 flex items-center justify-center text-2xl group-hover:scale-110 duration-300">
+            📰
+        </div>
+
+        <div class="flex-1">
+
+            <div class="flex items-center justify-between">
+
+                <h3 class="font-bold text-sm text-slate-900 mb-1">
+                    Berita Kampus
+                </h3>
+
+                <span class="text-green-700 text-sm font-bold">
+                    →
+                </span>
+
+            </div>
+
+            <p class="text-slate-500 text-xs leading-relaxed">
+                Informasi terbaru mengenai kegiatan, pengumuman, dan program kerja mahasiswa.
+            </p>
+
+        </div>
+
+    </a>
+
+</div>
 
 </section>
 
@@ -343,7 +374,7 @@
                     dan berita terbaru organisasi mahasiswa.
                 </p>
 
-                <a href="{{ route('berita.index') }}"
+                <a href="{{ route('public.berita.index') }}"
                    class="inline-flex items-center gap-2 bg-blue-900 hover:bg-blue-800 text-white px-5 py-3 rounded-xl text-sm font-semibold duration-300">
 
                     Baca Berita

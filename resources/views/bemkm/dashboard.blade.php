@@ -2,276 +2,135 @@
 
 @section('content')
 
-<!-- HEADER -->
-<div class="flex justify-between items-center mb-8">
+<div class="space-y-8">
 
-    <div>
+    <!-- HEADER -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
 
-        <h1 class="text-3xl font-bold text-[#041C64]">
-            Selamat Datang, Administrator 👋
-        </h1>
+        <div>
 
-        <p class="text-gray-500 text-base mt-2">
-            Kelola organisasi dan kegiatan mahasiswa dengan mudah dan terintegrasi.
-        </p>
+            <h1 class="text-3xl font-bold text-[#041C64]">
+                Dashboard BEM KM
+            </h1>
 
-    </div>
+            <p class="text-gray-500 text-base mt-2">
+                Monitoring proposal, LPJ, surat, dan inventaris organisasi mahasiswa.
+            </p>
 
-    <div class="text-[#1A46D3] font-medium text-sm bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100">
-        📅 {{ now()->translatedFormat('l, d F Y') }}
-    </div>
+        </div>
 
-</div>
+        <div class="bg-white px-5 py-4 rounded-2xl shadow-sm border border-gray-100">
 
-<!-- STATISTIK -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <p class="text-sm text-gray-500">
+                Hari Ini
+            </p>
 
-    <!-- PROPOSAL -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-        <div class="flex justify-between items-center">
-
-            <div>
-
-                <p class="text-gray-500 text-sm">
-                    Proposal Masuk
-                </p>
-
-                <h2 class="text-4xl font-bold text-[#041C64] mt-3">
-                    {{ $proposalCount }}
-                </h2>
-
-                <p class="text-green-500 text-sm font-medium mt-3">
-                    Total proposal dari seluruh ORMAWA
-                </p>
-
-            </div>
-
-            <div class="w-16 h-16 rounded-2xl bg-[#EEF3FF] text-3xl flex items-center justify-center">
-                📄
-            </div>
+            <h3 class="font-semibold text-[#041C64] mt-1">
+                📅 {{ now()->translatedFormat('l, d F Y') }}
+            </h3>
 
         </div>
 
     </div>
 
-    <!-- LPJ -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+    <!-- STATISTIK RINGKAS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
 
-        <div class="flex justify-between items-center">
+        <!-- PROPOSAL -->
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
 
-            <div>
-
-                <p class="text-gray-500 text-sm">
-                    LPJ Masuk
-                </p>
-
-                <h2 class="text-4xl font-bold text-[#041C64] mt-3">
-                    {{ $lpjCount }}
-                </h2>
-
-                <p class="text-green-500 text-sm font-medium mt-3">
-                    Total LPJ dari seluruh ORMAWA
-                </p>
-
-            </div>
-
-            <div class="w-16 h-16 rounded-2xl bg-[#FFF5D8] text-3xl flex items-center justify-center">
-                📘
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- BERITA -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-        <div class="flex justify-between items-center">
-
-            <div>
-
-                <p class="text-gray-500 text-sm">
-                    Berita Publish
-                </p>
-
-                <h2 class="text-4xl font-bold text-[#041C64] mt-3">
-                    {{ $beritaCount }}
-                </h2>
-
-                <p class="text-green-500 text-sm font-medium mt-3">
-                    Total berita yang dipublikasikan
-                </p>
-
-            </div>
-
-            <div class="w-16 h-16 rounded-2xl bg-[#EEF3FF] text-3xl flex items-center justify-center">
-                📰
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- INVENTARIS -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-        <div class="flex justify-between items-center">
-
-            <div>
-
-                <p class="text-gray-500 text-sm">
-                    Inventaris
-                </p>
-
-                <h2 class="text-4xl font-bold text-[#041C64] mt-3">
-                    {{ $inventarisCount }}
-                </h2>
-
-                <p class="text-green-500 text-sm font-medium mt-3">
-                    Total inventaris organisasi
-                </p>
-
-            </div>
-
-            <div class="w-16 h-16 rounded-2xl bg-[#FFF5D8] text-3xl flex items-center justify-center">
-                📦
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- CONTENT GRID -->
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-8">
-
-    <!-- PROPOSAL TERBARU -->
-    <div class="xl:col-span-2 bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
-
-        <!-- HEADER -->
-        <div class="flex justify-between items-center mb-6">
-
-            <div>
-
-                <h2 class="text-2xl font-bold text-[#041C64]">
-                    Proposal Terbaru
-                </h2>
-
-                <p class="text-sm text-gray-500 mt-1">
-                    Daftar proposal terbaru organisasi mahasiswa
-                </p>
-
-            </div>
-
-            <a href="{{ route('bemkm.proposal.index') }}"
-               class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-5 py-3 rounded-2xl text-sm font-semibold transition">
-                Lihat Semua
-            </a>
-
-        </div>
-
-        <!-- TABLE -->
-        <div class="overflow-x-auto">
-
-            <table class="w-full">
-
-                <thead>
-
-                    <tr class="border-b text-left">
-
-                        <th class="pb-4 text-sm text-gray-500 font-semibold">
-                            Kegiatan
-                        </th>
-
-                        <th class="pb-4 text-sm text-gray-500 font-semibold">
-                            Organisasi
-                        </th>
-
-                        <th class="pb-4 text-sm text-gray-500 font-semibold">
-                            Status
-                        </th>
-
-                        <th class="pb-4 text-sm text-gray-500 font-semibold">
-                            Tanggal
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @forelse($proposalTerbaru as $proposal)
-
-                    <tr class="border-b hover:bg-gray-50 transition">
-
-                        <td class="py-5 font-medium text-[#041C64]">
-                            {{ $proposal->nama_kegiatan }}
-                        </td>
-
-                        <td class="text-gray-600">
-                            {{ $proposal->ormawa->nama_ormawa ?? '-' }}
-                        </td>
-
-                        <td>
-
-                            <span class="px-4 py-2 rounded-full text-xs font-semibold
-                                @if($proposal->status == 'Pending') bg-yellow-100 text-yellow-700
-                                @elseif($proposal->status == 'Disetujui') bg-green-100 text-green-700
-                                @else bg-blue-100 text-blue-700
-                                @endif">
-
-                                {{ $proposal->status }}
-
-                            </span>
-
-                        </td>
-
-                        <td class="text-gray-500">
-                            {{ $proposal->created_at->format('d M Y') }}
-                        </td>
-
-                    </tr>
-
-                    @empty
-
-                    <tr>
-                        <td colspan="4" class="py-6 text-center text-gray-500">
-                            Belum ada proposal masuk
-                        </td>
-                    </tr>
-
-                    @endforelse
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <!-- LPJ SECTION -->
-        <div class="mt-10">
-
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center">
 
                 <div>
 
-                    <h2 class="text-2xl font-bold text-[#041C64]">
-                        LPJ Terbaru
-                    </h2>
-
-                    <p class="text-sm text-gray-500 mt-1">
-                        Daftar LPJ terbaru organisasi mahasiswa
+                    <p class="text-sm text-gray-500">
+                        Proposal
                     </p>
+
+                    <h2 class="text-4xl font-bold text-[#041C64] mt-2">
+                        {{ $proposalCount }}
+                    </h2>
 
                 </div>
 
-                <a href="{{ route('bemkm.lpj.index') }}"
-                   class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-5 py-3 rounded-2xl text-sm font-semibold transition">
-                    Lihat Semua
-                </a>
+                <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl">
+                    📄
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LPJ -->
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+
+            <div class="flex justify-between items-center">
+
+                <div>
+
+                    <p class="text-sm text-gray-500">
+                        LPJ
+                    </p>
+
+                    <h2 class="text-4xl font-bold text-[#041C64] mt-2">
+                        {{ $lpjCount }}
+                    </h2>
+
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center text-2xl">
+                    📘
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SURAT -->
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+
+            <div class="flex justify-between items-center">
+
+                <div>
+
+                    <p class="text-sm text-gray-500">
+                        Surat
+                    </p>
+
+                    <h2 class="text-4xl font-bold text-[#041C64] mt-2">
+                        {{ $suratCount }}
+                    </h2>
+
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-2xl">
+                    📩
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- INVENTARIS -->
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+
+            <div class="flex justify-between items-center">
+
+                <div>
+
+                    <p class="text-sm text-gray-500">
+                        Inventaris
+                    </p>
+
+                    <h2 class="text-4xl font-bold text-[#041C64] mt-2">
+                        {{ $inventarisCount }}
+                    </h2>
+
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center text-2xl">
+                    📦
+                </div>
 
             </div>
 
@@ -279,46 +138,340 @@
 
     </div>
 
-    <!-- AKSI CEPAT -->
-    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
+    <!-- ACCORDION MENU -->
+    <div class="space-y-5">
 
-        <h2 class="text-2xl font-bold text-[#041C64] mb-6">
-            Aksi Cepat
-        </h2>
+        <!-- PROPOSAL -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
 
-        <div class="space-y-4">
+            <details>
 
-            <!-- UPLOAD PROPOSAL -->
-            <a href="{{ route('bemkm.proposal.create') }}"
-               class="block w-full bg-[#1A46D3] hover:bg-[#1238B3] text-white py-4 rounded-2xl font-semibold transition text-center">
+                <summary class="list-none cursor-pointer px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition">
 
-                + Upload Proposal ke DPM
+                    <div class="flex items-center gap-4">
 
-            </a>
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-2xl">
+                            📄
+                        </div>
 
-            <!-- UPLOAD LPJ -->
-            <a href="{{ route('bemkm.lpj.create') }}"
-               class="block w-full border border-[#1A46D3] text-[#1A46D3] py-4 rounded-2xl font-semibold hover:bg-blue-50 transition text-center">
+                        <div>
 
-                Upload LPJ ke DPM
+                            <h2 class="text-xl font-bold text-[#041C64]">
+                                Proposal Masuk
+                            </h2>
 
-            </a>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Daftar proposal terbaru ORMAWA & UKM
+                            </p>
 
-            <!-- BERITA -->
-            <a href="{{ route('bemkm.berita.create') }}"
-               class="block w-full border border-[#1A46D3] text-[#1A46D3] py-4 rounded-2xl font-semibold hover:bg-blue-50 transition text-center">
+                        </div>
 
-                Buat Berita
+                    </div>
 
-            </a>
+                    <div class="flex items-center gap-5">
 
-            <!-- INVENTARIS -->
-            <a href="{{ route('bemkm.inventaris.create') }}"
-               class="block w-full border border-[#1A46D3] text-[#1A46D3] py-4 rounded-2xl font-semibold hover:bg-blue-50 transition text-center">
+                        <a href="{{ route('bemkm.proposal.index') }}"
+                           class="text-[#1A46D3] font-semibold text-sm hover:underline">
+                            Lihat Selengkapnya
+                        </a>
 
-                Tambah Inventaris
+                        <span class="text-2xl text-gray-400">
+                            ⌄
+                        </span>
 
-            </a>
+                    </div>
+
+                </summary>
+
+                <div class="px-6 pb-6 overflow-x-auto">
+
+                    <table class="w-full">
+
+                        <thead>
+
+                            <tr class="border-b text-left">
+
+                                <th class="pb-4 text-sm text-gray-500">
+                                    Kegiatan
+                                </th>
+
+                                <th class="pb-4 text-sm text-gray-500">
+                                    Organisasi
+                                </th>
+
+                                <th class="pb-4 text-sm text-gray-500">
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @forelse($proposalTerbaru as $proposal)
+
+                            <tr class="border-b hover:bg-gray-50 transition">
+
+                                <td class="py-5 font-medium text-[#041C64]">
+                                    {{ $proposal->nama_kegiatan }}
+                                </td>
+
+                                <td class="text-gray-600">
+                                    {{ $proposal->ormawa->nama_ormawa ?? '-' }}
+                                </td>
+
+                                <td>
+
+                                    <span class="px-4 py-2 rounded-full text-xs font-semibold
+                                        @if($proposal->status == 'Pending') bg-yellow-100 text-yellow-700
+                                        @elseif($proposal->status == 'Disetujui') bg-green-100 text-green-700
+                                        @else bg-blue-100 text-blue-700
+                                        @endif">
+
+                                        {{ $proposal->status }}
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            @empty
+
+                            <tr>
+
+                                <td colspan="3" class="py-8 text-center text-gray-500">
+                                    Belum ada proposal masuk
+                                </td>
+
+                            </tr>
+
+                            @endforelse
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </details>
+
+        </div>
+
+        <!-- LPJ -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+
+            <details>
+
+                <summary class="list-none cursor-pointer px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition">
+
+                    <div class="flex items-center gap-4">
+
+                        <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center text-2xl">
+                            📘
+                        </div>
+
+                        <div>
+
+                            <h2 class="text-xl font-bold text-[#041C64]">
+                                LPJ Masuk
+                            </h2>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Daftar LPJ terbaru organisasi mahasiswa
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex items-center gap-5">
+
+                        <a href="{{ route('bemkm.lpj.index') }}"
+                           class="text-[#1A46D3] font-semibold text-sm hover:underline">
+                            Lihat Selengkapnya
+                        </a>
+
+                        <span class="text-2xl text-gray-400">
+                            ⌄
+                        </span>
+
+                    </div>
+
+                </summary>
+
+                <div class="px-6 pb-6 overflow-x-auto">
+
+                    <table class="w-full">
+
+                        <thead>
+
+                            <tr class="border-b text-left">
+
+                                <th class="pb-4 text-sm text-gray-500">
+                                    Nama Kegiatan
+                                </th>
+
+                                <th class="pb-4 text-sm text-gray-500">
+                                    Organisasi
+                                </th>
+
+                                <th class="pb-4 text-sm text-gray-500">
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @forelse($lpjTerbaru as $lpj)
+
+                            <tr class="border-b hover:bg-gray-50 transition">
+
+                                <td class="py-5 font-medium text-[#041C64]">
+                                    {{ $lpj->nama_kegiatan ?? '-' }}
+                                </td>
+
+                                <td class="text-gray-600">
+                                    {{ $lpj->ormawa->nama_ormawa ?? '-' }}
+                                </td>
+
+                                <td>
+
+                                    <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
+                                        {{ $lpj->status ?? 'Masuk' }}
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            @empty
+
+                            <tr>
+
+                                <td colspan="3" class="py-8 text-center text-gray-500">
+                                    Belum ada LPJ masuk
+                                </td>
+
+                            </tr>
+
+                            @endforelse
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </details>
+
+        </div>
+
+        <!-- SURAT -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+
+            <details>
+
+                <summary class="list-none cursor-pointer px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition">
+
+                    <div class="flex items-center gap-4">
+
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-2xl">
+                            📩
+                        </div>
+
+                        <div>
+
+                            <h2 class="text-xl font-bold text-[#041C64]">
+                                Surat Masuk
+                            </h2>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Surat kegiatan yang diajukan ORMAWA
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex items-center gap-5">
+
+                        <a href="{{ route('bemkm.surat.index') }}"
+                           class="text-[#1A46D3] font-semibold text-sm hover:underline">
+                            Lihat Selengkapnya
+                        </a>
+
+                        <span class="text-2xl text-gray-400">
+                            ⌄
+                        </span>
+
+                    </div>
+
+                </summary>
+
+                <div class="px-6 pb-6 text-gray-500">
+
+                    Klik "Lihat Selengkapnya" untuk melihat dan memverifikasi surat masuk.
+
+                </div>
+
+            </details>
+
+        </div>
+
+        <!-- INVENTARIS -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+
+            <details>
+
+                <summary class="list-none cursor-pointer px-6 py-5 flex items-center justify-between hover:bg-gray-50 transition">
+
+                    <div class="flex items-center gap-4">
+
+                        <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center text-2xl">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <h2 class="text-xl font-bold text-[#041C64]">
+                                Peminjaman Inventaris
+                            </h2>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Monitoring peminjaman inventaris organisasi
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex items-center gap-5">
+
+                        <a href="{{ route('bemkm.inventaris.index') }}"
+                           class="text-[#1A46D3] font-semibold text-sm hover:underline">
+                            Lihat Selengkapnya
+                        </a>
+
+                        <span class="text-2xl text-gray-400">
+                            ⌄
+                        </span>
+
+                    </div>
+
+                </summary>
+
+                <div class="px-6 pb-6 text-gray-500">
+
+                    Klik "Lihat Selengkapnya" untuk melihat inventaris dan peminjaman.
+
+                </div>
+
+            </details>
 
         </div>
 
@@ -327,3 +480,4 @@
 </div>
 
 @endsection
+```

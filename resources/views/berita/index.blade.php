@@ -1,364 +1,569 @@
-@extends('bemkm.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 
-<!-- HEADER -->
-<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-8">
+<div class="bg-[#F8FAFC] min-h-screen">
 
-    <div>
+    <!-- HERO -->
+<section class="pt-8 pb-24 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
 
-        <h1 class="text-3xl font-bold text-[#041C64]">
-            Inventaris BEM KM
-        </h1>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
 
-        <p class="text-gray-500 mt-2">
-            Kelola data inventaris dan perlengkapan organisasi mahasiswa.
-        </p>
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-    </div>
+            <!-- LEFT -->
+            <div>
 
-    <!-- BUTTON -->
-    <div>
+                <!-- BADGE -->
+                <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-sm">
 
-        <button
-            class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-6 py-3 rounded-2xl font-semibold shadow-sm transition">
+                    Portal Berita
 
-            + Tambah Inventaris
+                </div>
 
-        </button>
+                <!-- TITLE -->
+                <h1 class="text-4xl lg:text-5xl
+                           font-black
+                           leading-tight
+                           text-slate-900">
 
-    </div>
+                    Berita
 
-</div>
+                    <span class="text-amber-500">
+                        & Informasi Kampus
+                    </span>
 
-<!-- FILTER -->
-<div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 mb-8">
+                    Modern
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                </h1>
 
-        <!-- SEARCH -->
-        <div class="md:col-span-2">
+                <!-- DESCRIPTION -->
+                <p class="text-slate-600
+                          text-lg
+                          leading-relaxed
+                          mt-8
+                          max-w-2xl">
 
-            <label class="text-sm font-medium text-gray-600 mb-2 block">
-                Cari Barang
-            </label>
+                    Platform informasi digital mahasiswa Universitas Respati Yogyakarta
+                    untuk publikasi kegiatan kampus,
+                    organisasi mahasiswa,
+                    seminar,
+                    pengumuman akademik,
+                    dan berita terbaru secara modern.
 
-            <input type="text"
-                   placeholder="Cari nama barang..."
-                   class="w-full border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-blue-200">
+                </p>
 
-        </div>
+                <!-- BUTTON -->
+                <div class="flex flex-wrap gap-4 mt-10">
 
-        <!-- STATUS -->
-        <div>
+                    <a href="#berita"
+                       class="inline-flex items-center gap-3
+                              bg-blue-900
+                              hover:bg-blue-800
+                              text-white
+                              px-7 py-4
+                              rounded-2xl
+                              font-semibold
+                              shadow-md
+                              duration-300">
 
-            <label class="text-sm font-medium text-gray-600 mb-2 block">
-                Kondisi
-            </label>
+                        Jelajahi Berita
 
-            <select
-                class="w-full border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-blue-200">
+                        <span>→</span>
 
-                <option>Semua Kondisi</option>
-                <option>Baik</option>
-                <option>Rusak Ringan</option>
-                <option>Rusak Berat</option>
+                    </a>
 
-            </select>
+                </div>
 
-        </div>
-
-        <!-- BUTTON -->
-        <div class="flex items-end">
-
-            <button
-                class="w-full bg-[#041C64] hover:bg-[#02113D] text-white py-3 rounded-2xl font-semibold transition">
-
-                Filter Data
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- STATISTIK -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
-
-    <!-- CARD -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-        <p class="text-sm text-gray-500">
-            Total Inventaris
-        </p>
-
-        <div class="flex justify-between items-center mt-4">
-
-            <h2 class="text-4xl font-bold text-[#041C64]">
-                35
-            </h2>
-
-            <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
-                📦
             </div>
 
-        </div>
+            <!-- RIGHT -->
+            <div class="relative">
 
-    </div>
+                <!-- BG -->
+                <div class="absolute w-[300px] h-[300px] bg-blue-100 rounded-full blur-3xl opacity-50"></div>
 
-    <!-- CARD -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                <!-- CARD -->
+                <div class="relative bg-white rounded-[28px]
+                            border border-slate-100
+                            shadow-xl p-8">
 
-        <p class="text-sm text-gray-500">
-            Barang Baik
-        </p>
+                    <!-- TOP -->
+                    <div class="flex items-center justify-between mb-10">
 
-        <div class="flex justify-between items-center mt-4">
+                        <div>
 
-            <h2 class="text-4xl font-bold text-green-500">
-                28
-            </h2>
+                            <p class="text-sm text-slate-400">
+                                Informasi Terbaru
+                            </p>
 
-            <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
-                ✅
-            </div>
+                            <h3 class="text-3xl font-black text-slate-900 mt-2">
 
-        </div>
+                                Pengumuman
 
-    </div>
-
-    <!-- CARD -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-        <p class="text-sm text-gray-500">
-            Dipinjam
-        </p>
-
-        <div class="flex justify-between items-center mt-4">
-
-            <h2 class="text-4xl font-bold text-yellow-500">
-                5
-            </h2>
-
-            <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-2xl">
-                🔄
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- CARD -->
-    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-        <p class="text-sm text-gray-500">
-            Rusak
-        </p>
-
-        <div class="flex justify-between items-center mt-4">
-
-            <h2 class="text-4xl font-bold text-red-500">
-                2
-            </h2>
-
-            <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center text-2xl">
-                ❌
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- TABLE -->
-<div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-
-    <!-- HEADER -->
-    <div class="px-6 py-5 border-b border-gray-100">
-
-        <h2 class="text-2xl font-bold text-[#041C64]">
-            Daftar Inventaris
-        </h2>
-
-        <p class="text-sm text-gray-500 mt-1">
-            Data inventaris organisasi mahasiswa
-        </p>
-
-    </div>
-
-    <!-- TABLE -->
-    <div class="overflow-x-auto">
-
-        <table class="w-full">
-
-            <thead class="bg-gray-50">
-
-                <tr>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Nama Barang
-                    </th>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Kategori
-                    </th>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Jumlah
-                    </th>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Kondisi
-                    </th>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Status
-                    </th>
-
-                    <th class="text-center px-6 py-4 text-sm font-semibold text-gray-500">
-                        Aksi
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <!-- ROW -->
-                <tr class="border-t hover:bg-gray-50 transition">
-
-                    <td class="px-6 py-5">
-
-                        <h3 class="font-semibold text-[#041C64]">
-                            Proyektor Epson
-                        </h3>
-
-                        <p class="text-sm text-gray-500 mt-1">
-                            Inventaris seminar
-                        </p>
-
-                    </td>
-
-                    <td class="px-6 py-5 text-gray-600">
-                        Elektronik
-                    </td>
-
-                    <td class="px-6 py-5 font-semibold text-[#041C64]">
-                        3 Unit
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
-                            Baik
-                        </span>
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-semibold">
-                            Dipinjam
-                        </span>
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <div class="flex items-center justify-center gap-3">
-
-                            <button
-                                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
-
-                                Edit
-
-                            </button>
-
-                            <button
-                                class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
-
-                                Hapus
-
-                            </button>
+                            </h3>
 
                         </div>
 
-                    </td>
+                        <!-- LOGO -->
+                        <div class="w-20 h-20
+                                    flex items-center justify-center">
 
-                </tr>
-
-                <!-- ROW -->
-                <tr class="border-t hover:bg-gray-50 transition">
-
-                    <td class="px-6 py-5">
-
-                        <h3 class="font-semibold text-[#041C64]">
-                            Speaker Portable
-                        </h3>
-
-                        <p class="text-sm text-gray-500 mt-1">
-                            Peralatan kegiatan
-                        </p>
-
-                    </td>
-
-                    <td class="px-6 py-5 text-gray-600">
-                        Audio
-                    </td>
-
-                    <td class="px-6 py-5 font-semibold text-[#041C64]">
-                        5 Unit
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
-                            Baik
-                        </span>
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-semibold">
-                            Tersedia
-                        </span>
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <div class="flex items-center justify-center gap-3">
-
-                            <button
-                                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
-
-                                Edit
-
-                            </button>
-
-                            <button
-                                class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
-
-                                Hapus
-
-                            </button>
+                            <img src="{{ asset('storage/logokabinet.png') }}"
+                                 alt="Logo"
+                                 class="w-20 h-20 object-contain">
 
                         </div>
 
-                    </td>
+                    </div>
 
-                </tr>
+                    <!-- LIST -->
+                    <div class="space-y-5">
 
-            </tbody>
+                        @forelse($pengumuman as $item)
 
-        </table>
+                        <!-- ITEM -->
+                        <a href="{{ route('public.berita.detail', $item->slug) }}"
+                           class="group flex items-start gap-4
+                                  p-5 rounded-3xl
+                                  border border-slate-100
+                                  hover:border-blue-200
+                                  hover:bg-blue-50/50
+                                  duration-300">
+
+                            <!-- ICON -->
+                            <div class="w-14 h-14 rounded-2xl
+                                        bg-amber-100
+                                        flex items-center justify-center
+                                        text-2xl shrink-0">
+
+                                📢
+
+                            </div>
+
+                            <!-- CONTENT -->
+                            <div class="flex-1 min-w-0">
+
+                                <div class="flex items-center justify-between gap-3">
+
+                                    <h4 class="font-bold text-slate-900 line-clamp-2">
+
+                                        {{ $item->judul }}
+
+                                    </h4>
+
+                                    <span class="text-slate-900 shrink-0">
+                                        →
+                                    </span>
+
+                                </div>
+
+                                <p class="text-slate-500 text-sm mt-2 line-clamp-2">
+
+                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->isi), 70) }}
+
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        @empty
+
+                        <!-- EMPTY -->
+                        <div class="text-center py-10">
+
+                            <div class="text-5xl mb-4">
+                                📢
+                            </div>
+
+                            <h4 class="text-xl font-bold text-slate-900">
+
+                                Belum Ada Pengumuman
+
+                            </h4>
+
+                            <p class="text-slate-500 mt-2 text-sm">
+
+                                Berita kategori pengumuman akan tampil otomatis di sini.
+
+                            </p>
+
+                        </div>
+
+                        @endforelse
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
+
+</section>
+
+<!-- BERITA -->
+<section id="berita"
+         class="py-20 bg-slate-50">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+        <!-- HEADER -->
+        <div class="text-center mb-14">
+
+            <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-900 px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
+
+                Berita Kampus
+
+            </div>
+
+            <h2 class="text-3xl lg:text-4xl
+                       font-black
+                       text-slate-900
+                       mt-4">
+
+                Informasi &
+                Aktivitas Mahasiswa
+
+            </h2>
+
+            <p class="text-slate-500 text-lg mt-5 max-w-3xl mx-auto leading-relaxed">
+
+                Informasi terbaru mengenai kegiatan organisasi,
+                seminar,
+                pengumuman akademik,
+                dan aktivitas mahasiswa Universitas Respati Yogyakarta.
+
+            </p>
+
+        </div>
+
+        <!-- GRID -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            @forelse($beritas as $berita)
+
+            <!-- CARD -->
+            <article class="group bg-white
+                            rounded-[22px]
+                            overflow-hidden
+                            border border-slate-100
+                            hover:-translate-y-1
+                            hover:shadow-xl
+                            duration-300">
+
+                <!-- IMAGE -->
+                <div class="relative overflow-hidden">
+
+                    @if($berita->thumbnail)
+
+                    <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
+                         class="w-full h-[220px]
+                                object-cover
+                                group-hover:scale-105
+                                duration-500">
+
+                    @else
+
+                    <div class="w-full h-[220px]
+                                bg-blue-50
+                                flex items-center justify-center
+                                text-5xl">
+
+                        📰
+
+                    </div>
+
+                    @endif
+
+                    <!-- CATEGORY -->
+                    <div class="absolute top-3 left-3">
+
+                        <span class="bg-white/90
+                                     backdrop-blur-xl
+                                     text-slate-900
+                                     px-3 py-1.5
+                                     rounded-full
+                                     text-[10px]
+                                     font-bold shadow">
+
+                            {{ $berita->kategori }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="p-5">
+
+                    <!-- DATE -->
+                    <p class="text-xs text-slate-400">
+
+                        {{ $berita->created_at->format('d M Y') }}
+
+                    </p>
+
+                    <!-- TITLE -->
+                    <h3 class="text-lg
+                               font-bold
+                               text-slate-900
+                               leading-snug
+                               mt-3
+                               line-clamp-2">
+
+                        {{ $berita->judul }}
+
+                    </h3>
+
+                    <!-- DESC -->
+                    <p class="text-sm
+                              text-slate-500
+                              leading-relaxed
+                              mt-3
+                              line-clamp-3">
+
+                        {{ \Illuminate\Support\Str::limit(strip_tags($berita->isi), 90) }}
+
+                    </p>
+
+                    <!-- FOOTER -->
+                    <div class="mt-5">
+
+                        <a href="{{ route('public.berita.detail', $berita->slug) }}"
+                           class="inline-flex items-center gap-2
+                                  text-sm font-semibold
+                                  text-blue-900
+                                  hover:text-blue-700
+                                  duration-300">
+
+                            Baca Selengkapnya
+
+                            <span>→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            @empty
+
+            <!-- EMPTY -->
+            <div class="col-span-full">
+
+                <div class="bg-white
+                            rounded-[28px]
+                            border border-slate-100
+                            p-12 text-center">
+
+                    <div class="text-6xl mb-6">
+                        📰
+                    </div>
+
+                    <h3 class="text-3xl font-black text-slate-900">
+
+                        Belum Ada Berita
+
+                    </h3>
+
+                    <p class="text-slate-500 mt-4 max-w-lg mx-auto">
+
+                        Berita yang dipublikasikan dari dashboard
+                        akan tampil otomatis di halaman ini.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+
+</section>
+
+    
+                <h2 class="text-3xl lg:text-4xl
+                           font-black
+                           text-slate-900
+                           mt-4">
+
+                    Informasi &
+                    Aktivitas Mahasiswa
+
+                </h2>
+
+                <p class="text-slate-500 text-lg mt-5 max-w-3xl mx-auto leading-relaxed">
+
+                    Informasi terbaru mengenai kegiatan organisasi,
+                    seminar,
+                    pengumuman akademik,
+                    dan aktivitas mahasiswa Universitas Respati Yogyakarta.
+
+                </p>
+
+            </div>
+
+            <!-- GRID -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                @forelse($beritas as $berita)
+
+                <!-- CARD -->
+                <article class="group bg-white
+                                rounded-[22px]
+                                overflow-hidden
+                                border border-slate-100
+                                hover:-translate-y-1
+                                hover:shadow-xl
+                                duration-300">
+
+                    <!-- IMAGE -->
+                    <div class="relative overflow-hidden">
+
+                        @if($berita->thumbnail)
+
+                        <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
+                             class="w-full h-[190px]
+                                    object-cover
+                                    group-hover:scale-105
+                                    duration-500">
+
+                        @else
+
+                        <div class="w-full h-[190px]
+                                    bg-blue-50
+                                    flex items-center justify-center
+                                    text-5xl">
+
+                            📰
+
+                        </div>
+
+                        @endif
+
+                        <!-- CATEGORY -->
+                        <div class="absolute top-3 left-3">
+
+                            <span class="bg-white/90
+                                         backdrop-blur-xl
+                                         text-slate-900
+                                         px-3 py-1.5
+                                         rounded-full
+                                         text-[10px]
+                                         font-bold shadow">
+
+                                {{ $berita->kategori }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="p-5">
+
+                        <!-- DATE -->
+                        <p class="text-xs text-slate-400">
+
+                            {{ $berita->created_at->format('d M Y') }}
+
+                        </p>
+
+                        <!-- TITLE -->
+                        <h3 class="text-lg
+                                   font-bold
+                                   text-slate-900
+                                   leading-snug
+                                   mt-3
+                                   line-clamp-2">
+
+                            {{ $berita->judul }}
+
+                        </h3>
+
+                        <!-- DESC -->
+                        <p class="text-sm
+                                  text-slate-500
+                                  leading-relaxed
+                                  mt-3
+                                  line-clamp-3">
+
+                            {{ \Illuminate\Support\Str::limit(strip_tags($berita->isi), 80) }}
+
+                        </p>
+
+                        <!-- FOOTER -->
+                        <div class="mt-5">
+
+                            <a href="{{ route('public.berita.detail', $berita->slug) }}"
+                               class="inline-flex items-center gap-2
+                                      text-sm font-semibold
+                                      text-blue-900
+                                      hover:text-blue-700
+                                      duration-300">
+
+                                Baca Selengkapnya
+
+                                <span>→</span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                @empty
+
+                <!-- EMPTY -->
+                <div class="col-span-full">
+
+                    <div class="bg-white
+                                rounded-[28px]
+                                border border-slate-100
+                                p-12 text-center">
+
+                        <div class="text-6xl mb-6">
+                            📰
+                        </div>
+
+                        <h3 class="text-3xl font-black text-slate-900">
+
+                            Belum Ada Berita
+
+                        </h3>
+
+                        <p class="text-slate-500 mt-4 max-w-lg mx-auto">
+
+                            Berita yang dipublikasikan dari dashboard
+                            akan tampil otomatis di halaman ini.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                @endforelse
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 

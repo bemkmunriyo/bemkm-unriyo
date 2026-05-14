@@ -1,269 +1,471 @@
-@extends('bemkm.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 
-<!-- HEADER -->
-<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-8">
+<style>
 
-    <div>
+/*
+|--------------------------------------------------------------------------
+| DETAIL BERITA
+|--------------------------------------------------------------------------
+*/
 
-        <h1 class="text-3xl font-bold text-[#041C64]">
-            Detail Inventaris
-        </h1>
+.berita-wrapper{
 
-        <p class="text-gray-500 mt-2">
-            Informasi lengkap data inventaris organisasi mahasiswa.
-        </p>
+    background:#F5F7FB;
+    min-height:100vh;
+    padding:60px 20px;
 
-    </div>
+}
 
-    <!-- BUTTON -->
-    <div class="flex items-center gap-4">
+.berita-container{
 
-        <a href="{{ route('bemkm.inventaris.index') }}"
-           class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-2xl font-semibold transition">
+    max-width:850px;
+    margin:auto;
 
-            ← Kembali
+}
 
-        </a>
+.berita-card{
 
-        <button
-            class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-6 py-3 rounded-2xl font-semibold transition">
+    background:#ffffff;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 10px 40px rgba(0,0,0,0.08);
 
-            Edit Data
+}
 
-        </button>
+/*
+|--------------------------------------------------------------------------
+| THUMBNAIL
+|--------------------------------------------------------------------------
+*/
 
-    </div>
+.berita-thumbnail{
 
-</div>
+    position:relative;
 
-<!-- DETAIL -->
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+    width:100%;
 
-    <!-- LEFT -->
-    <div class="xl:col-span-2 space-y-8">
+    height:420px;
 
-        <!-- INFORMASI -->
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+    overflow:hidden;
 
-            <div class="flex items-center justify-between mb-8">
+    background:#E5E7EB;
 
-                <div>
+}
 
-                    <h2 class="text-2xl font-bold text-[#041C64]">
-                        Informasi Barang
-                    </h2>
+.berita-thumbnail img{
 
-                    <p class="text-gray-500 mt-1">
-                        Data lengkap inventaris
-                    </p>
+    width:100%;
 
-                </div>
+    height:100%;
 
-                <div class="w-20 h-20 rounded-3xl bg-[#EEF3FF] flex items-center justify-center text-4xl">
-                    📦
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| KATEGORI
+|--------------------------------------------------------------------------
+*/
+
+.berita-kategori{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    background:#041C64;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| CONTENT
+|--------------------------------------------------------------------------
+*/
+
+.berita-content{
+
+    padding:40px;
+
+}
+
+.berita-title{
+
+    font-size:42px;
+
+    line-height:1.2;
+
+    color:#0B1442;
+
+    font-weight:800;
+
+    margin-bottom:35px;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| META
+|--------------------------------------------------------------------------
+*/
+
+.berita-meta{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:40px;
+
+    padding-bottom:30px;
+
+    border-bottom:1px solid #E5E7EB;
+
+    margin-bottom:35px;
+
+}
+
+.meta-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.meta-avatar{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:16px;
+
+    background:#EEF4FF;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:800;
+
+    color:#2563EB;
+
+    font-size:18px;
+
+}
+
+.meta-label{
+
+    font-size:13px;
+
+    color:#9CA3AF;
+
+    margin-bottom:4px;
+
+}
+
+.meta-value{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:#0B1442;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| ARTICLE
+|--------------------------------------------------------------------------
+*/
+
+.berita-isi{
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    color:#374151;
+
+}
+
+.berita-isi p{
+
+    margin-bottom:24px;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| FOOTER
+|--------------------------------------------------------------------------
+*/
+
+.berita-footer{
+
+    margin-top:50px;
+
+    padding-top:30px;
+
+    border-top:1px solid #E5E7EB;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-kategori{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.footer-label{
+
+    color:#9CA3AF;
+
+    font-size:14px;
+
+}
+
+.footer-badge{
+
+    background:#EEF4FF;
+
+    color:#2563EB;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+.btn-kembali{
+
+    background:#041C64;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+    transition:0.3s;
+
+}
+
+.btn-kembali:hover{
+
+    background:#02113D;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| RESPONSIVE
+|--------------------------------------------------------------------------
+*/
+
+@media(max-width:768px){
+
+    .berita-content{
+
+        padding:28px;
+
+    }
+
+    .berita-title{
+
+        font-size:30px;
+
+    }
+
+    .berita-thumbnail img{
+
+    max-height:180px;
+
+    }
+
+    .berita-isi{
+
+        font-size:16px;
+
+        line-height:1.8;
+
+    }
+
+}
+
+</style>
+
+<div class="berita-wrapper">
+
+    <div class="berita-container">
+
+        <!-- CARD -->
+        <article class="berita-card">
+
+            <!-- THUMBNAIL -->
+            @if($berita->thumbnail)
+
+            <div class="berita-thumbnail">
+
+                <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}">
+
+                <div class="berita-overlay"></div>
+
+                <div class="berita-kategori">
+
+                    {{ $berita->kategori }}
+
                 </div>
 
             </div>
 
-            <!-- GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @endif
 
-                <!-- ITEM -->
-                <div>
+            <!-- CONTENT -->
+            <div class="berita-content">
 
-                    <p class="text-sm text-gray-500">
-                        Nama Barang
-                    </p>
+                <!-- TITLE -->
+                <h1 class="berita-title">
 
-                    <h3 class="font-semibold text-[#041C64] text-lg mt-2">
-                        Proyektor Epson
-                    </h3>
+                    {{ $berita->judul }}
 
-                </div>
+                </h1>
 
-                <!-- ITEM -->
-                <div>
+                <!-- META -->
+                <div class="berita-meta">
 
-                    <p class="text-sm text-gray-500">
-                        Kategori
-                    </p>
+                    <!-- PENULIS -->
+                    <div class="meta-item">
 
-                    <h3 class="font-semibold text-[#041C64] text-lg mt-2">
-                        Elektronik
-                    </h3>
+                        <div class="meta-avatar">
 
-                </div>
+                            {{ strtoupper(substr($berita->penulis->name ?? 'A', 0, 1)) }}
 
-                <!-- ITEM -->
-                <div>
+                        </div>
 
-                    <p class="text-sm text-gray-500">
-                        Jumlah Barang
-                    </p>
+                        <div>
 
-                    <h3 class="font-semibold text-[#041C64] text-lg mt-2">
-                        3 Unit
-                    </h3>
+                            <div class="meta-label">
 
-                </div>
+                                Penulis
 
-                <!-- ITEM -->
-                <div>
+                            </div>
 
-                    <p class="text-sm text-gray-500">
-                        Kondisi
-                    </p>
+                            <div class="meta-value">
 
-                    <span class="inline-flex mt-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                                {{ $berita->penulis->name ?? 'Administrator' }}
 
-                        Baik
+                            </div>
 
-                    </span>
+                        </div>
 
-                </div>
+                    </div>
 
-                <!-- ITEM -->
-                <div>
+                    <!-- TANGGAL -->
+                    <div>
 
-                    <p class="text-sm text-gray-500">
-                        Status
-                    </p>
+                        <div class="meta-label">
 
-                    <span class="inline-flex mt-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">
+                            Dipublikasikan
 
-                        Dipinjam
+                        </div>
 
-                    </span>
+                        <div class="meta-value">
+
+                            {{ $berita->created_at->format('d F Y') }}
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <!-- ITEM -->
-                <div>
+                <!-- ISI -->
+                <div class="berita-isi">
 
-                    <p class="text-sm text-gray-500">
-                        Tahun Pengadaan
-                    </p>
-
-                    <h3 class="font-semibold text-[#041C64] text-lg mt-2">
-                        2024
-                    </h3>
+                    {!! nl2br(e($berita->isi)) !!}
 
                 </div>
 
-            </div>
+                <!-- FOOTER -->
+                <div class="berita-footer">
 
-        </div>
+                    <!-- KATEGORI -->
+                    <div class="footer-kategori">
 
-        <!-- DESKRIPSI -->
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+                        <span class="footer-label">
 
-            <h2 class="text-2xl font-bold text-[#041C64] mb-5">
-                Deskripsi Inventaris
-            </h2>
+                            Kategori:
 
-            <p class="text-gray-600 leading-8">
+                        </span>
 
-                Proyektor digunakan untuk kebutuhan seminar, pelatihan,
-                dan kegiatan presentasi organisasi mahasiswa.
-                Inventaris ini berada di ruang sekretariat BEM KM dan dapat
-                dipinjam sesuai prosedur peminjaman inventaris.
+                        <span class="footer-badge">
 
-            </p>
+                            {{ $berita->kategori }}
 
-        </div>
+                        </span>
 
-    </div>
+                    </div>
 
-    <!-- RIGHT -->
-    <div class="space-y-8">
+                    <!-- BUTTON -->
+                    <a href="{{ route('public.berita.index') }}"
+                       class="btn-kembali">
 
-        <!-- STATUS -->
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+                        ← Kembali
 
-            <h2 class="text-xl font-bold text-[#041C64] mb-6">
-                Status Inventaris
-            </h2>
-
-            <div class="space-y-5">
-
-                <!-- STATUS -->
-                <div class="flex justify-between items-center">
-
-                    <span class="text-gray-500">
-                        Kondisi
-                    </span>
-
-                    <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
-                        Baik
-                    </span>
-
-                </div>
-
-                <!-- STATUS -->
-                <div class="flex justify-between items-center">
-
-                    <span class="text-gray-500">
-                        Ketersediaan
-                    </span>
-
-                    <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">
-                        Dipinjam
-                    </span>
-
-                </div>
-
-                <!-- STATUS -->
-                <div class="flex justify-between items-center">
-
-                    <span class="text-gray-500">
-                        Lokasi
-                    </span>
-
-                    <span class="font-semibold text-[#041C64]">
-                        Gudang BEM
-                    </span>
+                    </a>
 
                 </div>
 
             </div>
 
-        </div>
-
-        <!-- AKSI -->
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-
-            <h2 class="text-xl font-bold text-[#041C64] mb-6">
-                Aksi Cepat
-            </h2>
-
-            <div class="space-y-4">
-
-                <button
-                    class="w-full bg-[#1A46D3] hover:bg-[#1238B3] text-white py-4 rounded-2xl font-semibold transition">
-
-                    Edit Inventaris
-
-                </button>
-
-                <button
-                    class="w-full border border-[#1A46D3] text-[#1A46D3] py-4 rounded-2xl font-semibold hover:bg-blue-50 transition">
-
-                    Riwayat Peminjaman
-
-                </button>
-
-                <button
-                    class="w-full bg-red-100 hover:bg-red-200 text-red-700 py-4 rounded-2xl font-semibold transition">
-
-                    Hapus Inventaris
-
-                </button>
-
-            </div>
-
-        </div>
+        </article>
 
     </div>
 

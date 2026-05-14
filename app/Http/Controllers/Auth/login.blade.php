@@ -33,12 +33,14 @@
         <!-- HEADER -->
         <div class="text-center mb-8">
 
-            <div class="w-20 h-20 mx-auto rounded-3xl bg-[#041C64]
-            flex items-center justify-center text-white text-4xl shadow-lg">
+            <div class="w-20 h-20
+            flex items-center justify-center">
 
-                🎓
+    <img src="{{ asset('storage/logokabinet.png') }}"
+         alt="Logo UNRIYO"
+         class="w-20 h-20 object-contain">
 
-            </div>
+</div>
 
             <h1 class="text-3xl font-bold text-[#041C64] mt-6">
                 Login Sistem

@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Proposal extends Model
 {
     protected $fillable = [
-
-        'user_id',
-        'judul',
-        'deskripsi',
-        'file',
-        'status',
-
-    ];
+    'judul',
+    'deskripsi',
+    'nominal',
+    'waktu_pelaksanaan',
+    'file',
+    'status',
+    'user_id'
+];
 public function ormawa()
 {
     return $this->belongsTo(User::class, 'user_id');
@@ -29,4 +29,5 @@ public function ormawa()
     {
         return $this->belongsTo(User::class);
     }
+    
 }

@@ -6,19 +6,93 @@ use App\Models\Berita;
 
 class BeritaPublicController extends Controller
 {
-    /**
-     * Halaman publik berita
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | HALAMAN BERITA PUBLIK
+    |--------------------------------------------------------------------------
+    */
+
     public function index()
     {
-        $beritas = Berita::latest()->get();
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL BERITA PUBLISHED
+        |--------------------------------------------------------------------------
+        */
 
-        return view('berita.index', compact('beritas'));
+        $beritas = Berita::where(
+            'status',
+            'published'
+        )
+        ->latest()
+        ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | AMBIL PENGUMUMAN
+        |--------------------------------------------------------------------------
+        */
+
+        $pengumuman = Berita::where(
+            'kategori',
+            'Pengumuman'
+        )
+        ->where(
+            'status',
+            'published'
+        )
+        ->latest()
+        ->take(3)
+        ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIEW
+        |--------------------------------------------------------------------------
+        */
+
+        return view(
+            'berita.index',
+            compact(
+                'beritas',
+                'pengumuman'
+            )
+        );
     }
-    public function show($slug)
-{
-    $berita = \App\Models\Berita::where('slug', $slug)->firstOrFail();
 
-    return view('berita.detail', compact('berita'));
-}
+    /*
+    |--------------------------------------------------------------------------
+    | DETAIL BERITA
+    |--------------------------------------------------------------------------
+    */
+
+    public function show($slug)
+    {
+        /*
+        |--------------------------------------------------------------------------
+        | CARI BERITA BERDASARKAN SLUG
+        |--------------------------------------------------------------------------
+        */
+
+        $berita = Berita::where(
+            'slug',
+            $slug
+        )
+        ->where(
+            'status',
+            'published'
+        )
+        ->firstOrFail();
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIEW
+        |--------------------------------------------------------------------------
+        */
+
+        return view(
+            'berita.detail',
+            compact('berita')
+        );
+    }
 }

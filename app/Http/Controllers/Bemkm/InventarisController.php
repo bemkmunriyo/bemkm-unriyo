@@ -10,70 +10,41 @@ class InventarisController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | HALAMAN INVENTARIS
+    | INDEX
     |--------------------------------------------------------------------------
     */
 
     public function index()
     {
-        /*
-        |--------------------------------------------------------------------------
-        | AMBIL DATA INVENTARIS
-        |--------------------------------------------------------------------------
-        */
-
         $inventaris = Inventaris::latest()->get();
-
-        /*
-        |--------------------------------------------------------------------------
-        | TOTAL BARANG
-        |--------------------------------------------------------------------------
-        */
 
         $totalBarang = $inventaris->count();
 
-        /*
-        |--------------------------------------------------------------------------
-        | SEDANG DIPINJAM
-        |--------------------------------------------------------------------------
-        */
-
         $sedangDipinjam = $inventaris
-                            ->where('status', 'dipinjam')
-                            ->count();
-
-        /*
-        |--------------------------------------------------------------------------
-        | BARANG TERSEDIA
-        |--------------------------------------------------------------------------
-        */
+            ->where('status', 'dipinjam')
+            ->count();
 
         $barangTersedia = $totalBarang - $sedangDipinjam;
 
-        /*
-        |--------------------------------------------------------------------------
-        | BARANG RUSAK
-        |--------------------------------------------------------------------------
-        */
-
         $barangRusak = $inventaris
-                            ->where('kondisi', 'rusak berat')
-                            ->count();
+            ->where('kondisi', 'rusak berat')
+            ->count();
 
-        return view('bemkm.inventaris.index', compact(
-
-            'inventaris',
-            'totalBarang',
-            'barangTersedia',
-            'sedangDipinjam',
-            'barangRusak'
-
-        ));
+        return view(
+            'bemkm.inventaris.index',
+            compact(
+                'inventaris',
+                'totalBarang',
+                'barangTersedia',
+                'sedangDipinjam',
+                'barangRusak'
+            )
+        );
     }
 
     /*
     |--------------------------------------------------------------------------
-    | FORM CREATE
+    | CREATE
     |--------------------------------------------------------------------------
     */
 
@@ -84,18 +55,12 @@ class InventarisController extends Controller
 
     /*
     |--------------------------------------------------------------------------
-    | SIMPAN DATA
+    | STORE
     |--------------------------------------------------------------------------
     */
 
     public function store(Request $request)
     {
-        /*
-        |--------------------------------------------------------------------------
-        | VALIDASI
-        |--------------------------------------------------------------------------
-        */
-
         $request->validate([
 
             'nama_barang' => 'required',
@@ -119,13 +84,12 @@ class InventarisController extends Controller
         if ($request->hasFile('gambar')) {
 
             $gambar = $request->file('gambar')
-                            ->store('inventaris', 'public');
-
+                ->store('inventaris', 'public');
         }
 
         /*
         |--------------------------------------------------------------------------
-        | SIMPAN INVENTARIS
+        | SIMPAN DATA
         |--------------------------------------------------------------------------
         */
 
@@ -149,20 +113,17 @@ class InventarisController extends Controller
 
         ]);
 
-        /*
-        |--------------------------------------------------------------------------
-        | REDIRECT
-        |--------------------------------------------------------------------------
-        */
-
         return redirect()
             ->route('bemkm.inventaris.index')
-            ->with('success', 'Inventaris berhasil ditambahkan');
+            ->with(
+                'success',
+                'Inventaris berhasil ditambahkan'
+            );
     }
 
     /*
     |--------------------------------------------------------------------------
-    | FORM EDIT
+    | EDIT
     |--------------------------------------------------------------------------
     */
 
@@ -170,18 +131,45 @@ class InventarisController extends Controller
     {
         $inventaris = Inventaris::findOrFail($id);
 
-        return view('bemkm.inventaris.edit', compact('inventaris'));
+        return view(
+            'bemkm.inventaris.edit',
+            compact('inventaris')
+        );
     }
 
     /*
     |--------------------------------------------------------------------------
-    | UPDATE INVENTARIS
+    | UPDATE
     |--------------------------------------------------------------------------
     */
 
     public function update(Request $request, $id)
     {
         $inventaris = Inventaris::findOrFail($id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDASI
+        |--------------------------------------------------------------------------
+        */
+
+        $request->validate([
+
+            'nama_barang' => 'required',
+
+            'stok' => 'required|integer',
+
+            'biaya_pemeliharaan' => 'required|integer',
+
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | GAMBAR LAMA
+        |--------------------------------------------------------------------------
+        */
 
         $gambar = $inventaris->gambar;
 
@@ -194,8 +182,7 @@ class InventarisController extends Controller
         if ($request->hasFile('gambar')) {
 
             $gambar = $request->file('gambar')
-                            ->store('inventaris', 'public');
-
+                ->store('inventaris', 'public');
         }
 
         /*
@@ -226,12 +213,15 @@ class InventarisController extends Controller
 
         return redirect()
             ->route('bemkm.inventaris.index')
-            ->with('success', 'Inventaris berhasil diupdate');
+            ->with(
+                'success',
+                'Inventaris berhasil diupdate'
+            );
     }
 
     /*
     |--------------------------------------------------------------------------
-    | HAPUS INVENTARIS
+    | DESTROY
     |--------------------------------------------------------------------------
     */
 
@@ -243,6 +233,9 @@ class InventarisController extends Controller
 
         return redirect()
             ->route('bemkm.inventaris.index')
-            ->with('success', 'Inventaris berhasil dihapus');
+            ->with(
+                'success',
+                'Inventaris berhasil dihapus'
+            );
     }
 }

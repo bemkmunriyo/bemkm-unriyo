@@ -32,7 +32,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-[#041C64]">
-                18
+                {{ $totalPeminjaman }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
@@ -55,7 +55,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-yellow-500">
-                5
+                {{ $pendingPeminjaman }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-2xl">
@@ -78,7 +78,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-green-500">
-                10
+                {{ $approvedPeminjaman }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
@@ -101,7 +101,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-red-500">
-                3
+                {{ $rejectedPeminjaman }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center text-2xl">
@@ -225,182 +225,130 @@
             <tbody>
 
                 <!-- ROW -->
-                <tr class="border-t hover:bg-gray-50 transition">
+                @forelse($peminjamans as $peminjaman)
 
-                    <!-- ORGANISASI -->
-                    <td class="px-6 py-5">
+<tr class="border-t hover:bg-gray-50 transition">
 
-                        <div class="flex items-center gap-4">
+    <!-- ORGANISASI -->
+    <td class="px-6 py-5">
 
-                            <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
+        <div class="flex items-center gap-4">
 
-                                🏢
+            <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
 
-                            </div>
+                🏢
 
-                            <div>
+            </div>
 
-                                <h3 class="font-semibold text-[#041C64] text-lg">
-                                    HIMA TI
-                                </h3>
+            <div>
 
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Fakultas Sains & Teknologi
-                                </p>
+                <h3 class="font-semibold text-[#041C64] text-lg">
 
-                            </div>
+                    {{ $peminjaman->organisasi }}
 
-                        </div>
+                </h3>
 
-                    </td>
+                <p class="text-sm text-gray-500 mt-1">
 
-                    <!-- BARANG -->
-                    <td class="px-6 py-5 text-gray-600">
+                    Organisasi Mahasiswa
 
-                        Proyektor Epson
+                </p>
 
-                    </td>
+            </div>
 
-                    <!-- KEPERLUAN -->
-                    <td class="px-6 py-5">
+        </div>
 
-                        Seminar Teknologi AI
+    </td>
 
-                    </td>
+    <!-- BARANG -->
+    <td class="px-6 py-5 text-gray-600">
 
-                    <!-- TANGGAL -->
-                    <td class="px-6 py-5 text-gray-500">
+        {{ $peminjaman->barang }}
 
-                        12 Mei 2026
+    </td>
 
-                    </td>
+    <!-- KEPERLUAN -->
+    <td class="px-6 py-5">
 
-                    <!-- STATUS -->
-                    <td class="px-6 py-5">
+        {{ $peminjaman->keperluan }}
 
-                        <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-semibold">
+    </td>
 
-                            Menunggu ACC
+    <!-- TANGGAL -->
+    <td class="px-6 py-5 text-gray-500">
 
-                        </span>
+        {{ $peminjaman->created_at->format('d M Y') }}
 
-                    </td>
+    </td>
 
-                    <!-- AKSI -->
-                    <td class="px-6 py-5">
+    <!-- STATUS -->
+    <td class="px-6 py-5">
 
-                        <div class="flex items-center justify-center gap-3">
+        <span class="px-4 py-2 rounded-full text-xs font-semibold
 
-                            <!-- ACC -->
-                            <button
-                                class="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+            @if($peminjaman->status == 'Menunggu ACC')
+                bg-yellow-100 text-yellow-700
+            @elseif($peminjaman->status == 'Disetujui')
+                bg-green-100 text-green-700
+            @else
+                bg-red-100 text-red-700
+            @endif">
 
-                                ACC
+            {{ $peminjaman->status }}
 
-                            </button>
+        </span>
 
-                            <!-- TOLAK -->
-                            <button
-                                class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+    </td>
 
-                                Tolak
+    <!-- AKSI -->
+    <td class="px-6 py-5">
 
-                            </button>
+        <div class="flex items-center justify-center gap-3 flex-wrap">
 
-                            <!-- DETAIL -->
-                            <button
-                                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+            <!-- ACC -->
+            <button
+                class="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
 
-                                Detail
+                ACC
 
-                            </button>
+            </button>
 
-                        </div>
+            <!-- TOLAK -->
+            <button
+                class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
 
-                    </td>
+                Tolak
 
-                </tr>
+            </button>
 
-                <!-- ROW -->
-                <tr class="border-t hover:bg-gray-50 transition">
+            <!-- DETAIL -->
+            <button
+                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
 
-                    <!-- ORGANISASI -->
-                    <td class="px-6 py-5">
+                Detail
 
-                        <div class="flex items-center gap-4">
+            </button>
 
-                            <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
+        </div>
 
-                                🎓
+    </td>
 
-                            </div>
+</tr>
 
-                            <div>
+@empty
 
-                                <h3 class="font-semibold text-[#041C64] text-lg">
-                                    BEM FIKES
-                                </h3>
+<tr>
 
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Fakultas Ilmu Kesehatan
-                                </p>
+    <td colspan="6"
+        class="text-center py-10 text-gray-500">
 
-                            </div>
+        Belum ada pengajuan peminjaman
 
-                        </div>
+    </td>
 
-                    </td>
+</tr>
 
-                    <!-- BARANG -->
-                    <td class="px-6 py-5 text-gray-600">
-
-                        Speaker Portable
-
-                    </td>
-
-                    <!-- KEPERLUAN -->
-                    <td class="px-6 py-5">
-
-                        Pelatihan Public Speaking
-
-                    </td>
-
-                    <!-- TANGGAL -->
-                    <td class="px-6 py-5 text-gray-500">
-
-                        10 Mei 2026
-
-                    </td>
-
-                    <!-- STATUS -->
-                    <td class="px-6 py-5">
-
-                        <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
-
-                            Disetujui
-
-                        </span>
-
-                    </td>
-
-                    <!-- AKSI -->
-                    <td class="px-6 py-5">
-
-                        <div class="flex items-center justify-center gap-3">
-
-                            <!-- DETAIL -->
-                            <button
-                                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
-
-                                Detail
-
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                </tr>
+@endforelse
 
             </tbody>
 

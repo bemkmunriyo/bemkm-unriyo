@@ -44,7 +44,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-[#041C64]">
-                20
+                {{ $totalBerita }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
@@ -65,7 +65,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-green-500">
-                15
+                {{ $published }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
@@ -86,7 +86,7 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-yellow-500">
-                5
+                {{ $draft }}
             </h2>
 
             <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-2xl">
@@ -163,95 +163,143 @@
 
             <tbody>
 
-                <!-- ROW -->
-                <tr class="border-t hover:bg-gray-50 transition">
+                @forelse($beritas as $berita)
 
-                    <!-- BERITA -->
-                    <td class="px-6 py-5">
+<tr class="border-t hover:bg-gray-50 transition">
 
-                        <div class="flex items-center gap-4">
+    <!-- BERITA -->
+    <td class="px-6 py-5">
 
-                            <!-- IMAGE -->
-                            <div class="w-20 h-20 rounded-2xl bg-gradient-to-r from-[#041C64] to-[#1A46D3] flex items-center justify-center text-white text-3xl shadow-sm">
+        <div class="flex items-center gap-4">
 
-                                📰
+            <!-- IMAGE -->
+        @if($berita->thumbnail)
 
-                            </div>
+        <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
+            class="w-20 h-20 rounded-2xl object-cover shadow-sm">
 
-                            <!-- TITLE -->
-                            <div>
+        @else
 
-                                <h3 class="font-semibold text-[#041C64] text-lg">
-                                    Seminar Nasional Teknologi AI
-                                </h3>
+        <div class="w-20 h-20 rounded-2xl bg-gradient-to-r from-[#041C64] to-[#1A46D3] flex items-center justify-center text-white text-3xl shadow-sm">
 
-                                <p class="text-sm text-gray-500 mt-1">
-                                    Seminar nasional mahasiswa teknologi informasi.
-                                </p>
+            📰
 
-                            </div>
+        </div>
 
-                        </div>
+        @endif
 
-                    </td>
+            <!-- TITLE -->
+            <div>
 
-                    <!-- PENULIS -->
-                    <td class="px-6 py-5 text-gray-600">
+                <h3 class="font-bold text-[#041C64] text-lg">
 
-                        {{ optional(auth()->user())->name ?? 'Administrator' }}
+                    {{ $berita->judul }}
 
-                    </td>
+                </h3>
 
-                    <!-- STATUS -->
-                    <td class="px-6 py-5">
+                <p class="text-sm text-gray-500 mt-1">
 
-                        <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
+                    {{ Str::limit($berita->isi, 80) }}
 
-                            Publish
+                </p>
 
-                        </span>
+            </div>
 
-                    </td>
+        </div>
 
-                    <!-- TANGGAL -->
-                    <td class="px-6 py-5 text-gray-500">
-                        10 Mei 2026
-                    </td>
+    </td>
 
-                    <!-- ACTION -->
-                    <td class="px-6 py-5">
+    <!-- PENULIS -->
+    <td class="px-6 py-5 text-gray-600">
 
-                        <div class="flex items-center justify-center gap-3">
+        {{ optional($berita->penulis)->name ?? 'Administrator' }}
 
-                            <!-- DETAIL -->
-                            <button
-                                class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+    </td>
 
-                                Detail
+    <!-- STATUS -->
+    <td class="px-6 py-5">
 
-                            </button>
+        <span class="px-4 py-2 rounded-full text-xs font-semibold
 
-                            <!-- EDIT -->
-                            <button
-                                class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+            @if($berita->status == 'Publish')
+                bg-green-100 text-green-700
+            @else
+                bg-yellow-100 text-yellow-700
+            @endif">
 
-                                Edit
+            {{ $berita->status }}
 
-                            </button>
+        </span>
 
-                            <!-- DELETE -->
-                            <button
-                                class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+    </td>
 
-                                Hapus
+    <!-- TANGGAL -->
+    <td class="px-6 py-5 text-gray-500">
 
-                            </button>
+        {{ $berita->created_at->format('d M Y') }}
 
-                        </div>
+    </td>
 
-                    </td>
+    <!-- ACTION -->
+<td class="px-6 py-5">
 
-                </tr>
+    <div class="flex items-center justify-center gap-3 flex-wrap">
+
+        <!-- DETAIL -->
+        <a href="{{ route('public.berita.detail', $berita->slug) }}"
+           target="_blank"
+           class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+            Detail
+
+        </a>
+
+        <!-- EDIT -->
+        <a href="{{ route('bemkm.berita.edit', $berita->id) }}"
+           class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+            Edit
+
+        </a>
+
+        <!-- DELETE -->
+        <form action="{{ url('/bemkm/berita/delete/' . $berita->id) }}"
+              method="POST"
+              class="inline-block">
+
+            @csrf
+
+            <button
+                type="submit"
+                onclick="return confirm('Yakin ingin menghapus berita ini?')"
+                class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+
+                Hapus
+
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
+
+</tr>
+
+@empty
+
+<tr>
+
+    <td colspan="5"
+        class="text-center py-10 text-gray-500">
+
+        Belum ada berita dipublikasikan
+
+    </td>
+
+</tr>
+
+@endforelse
 
             </tbody>
 

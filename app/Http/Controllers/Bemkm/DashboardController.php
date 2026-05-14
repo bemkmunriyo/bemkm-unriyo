@@ -8,6 +8,7 @@ use App\Models\Proposal;
 use App\Models\Lpj;
 use App\Models\Berita;
 use App\Models\Inventaris;
+use App\Models\Surat;
 
 class DashboardController extends Controller
 {
@@ -17,8 +18,7 @@ class DashboardController extends Controller
         |--------------------------------------------------------------------------
         | DATA STATISTIK DASHBOARD
         |--------------------------------------------------------------------------
-        */
-
+        */        
         $proposalCount = Proposal::count();
 
         $lpjCount = Lpj::count();
@@ -26,6 +26,8 @@ class DashboardController extends Controller
         $beritaCount = Berita::count();
 
         $inventarisCount = Inventaris::count();
+
+        $suratCount = Surat::count();
 
         /*
         |--------------------------------------------------------------------------
@@ -52,6 +54,7 @@ class DashboardController extends Controller
             'lpjCount',
             'beritaCount',
             'inventarisCount',
+            'suratCount',
             'proposalTerbaru',
             'lpjTerbaru'
         ));

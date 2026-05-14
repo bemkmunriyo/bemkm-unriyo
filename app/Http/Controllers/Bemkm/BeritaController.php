@@ -3,104 +3,273 @@
 namespace App\Http\Controllers\Bemkm;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Berita;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
-    /**
-     * Tampilkan semua berita
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | INDEX
+    |--------------------------------------------------------------------------
+    */
+
     public function index()
     {
         $beritas = Berita::latest()->get();
 
-        return view('bemkm.berita.index', compact('beritas'));
+        $totalBerita = Berita::count();
+
+        $published = Berita::where(
+            'status',
+            'published'
+        )->count();
+
+        $draft = Berita::where(
+            'status',
+            'draft'
+        )->count();
+
+        return view(
+            'bemkm.berita.index',
+            compact(
+                'beritas',
+                'totalBerita',
+                'published',
+                'draft'
+            )
+        );
     }
 
-    /**
-     * Form tambah berita
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE
+    |--------------------------------------------------------------------------
+    */
+
     public function create()
     {
         return view('bemkm.berita.create');
     }
 
-    /**
-     * Simpan berita baru
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | STORE
+    |--------------------------------------------------------------------------
+    */
+
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
+
+            'judul' => 'required',
+
+            'kategori' => 'required',
+
             'isi' => 'required',
-            'kategori' => 'nullable|string|max:100',
+
+            'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+
         ]);
 
-        $judul = $request->judul;
+        /*
+        |--------------------------------------------------------------------------
+        | UPLOAD THUMBNAIL
+        |--------------------------------------------------------------------------
+        */
 
-        // slug unik sederhana
-        $slug = Str::slug($judul) . '-' . time();
+        $thumbnail = $request->file('thumbnail');
+
+        $namaThumbnail = time() . '_' . $thumbnail->getClientOriginalName();
+
+        $thumbnail->move(
+            public_path('uploads/berita'),
+            $namaThumbnail
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | SIMPAN BERITA
+        |--------------------------------------------------------------------------
+        */
 
         Berita::create([
-            'judul' => $judul,
-            'slug' => $slug,
+
+            'judul' => $request->judul,
+
+            'slug' => Str::slug($request->judul),
+
             'isi' => $request->isi,
+
+            'thumbnail' => $namaThumbnail,
+
             'kategori' => $request->kategori,
-            'thumbnail' => null,
-            'penulis_id' => Auth::id() ?? 1,
+
+            'penulis_id' => Auth::id(),
+
             'status' => 'published',
+
             'published_at' => now(),
+
         ]);
 
-        return redirect()->route('berita.index')
-            ->with('success', 'Berita berhasil dipublish!');
+        return redirect()
+            ->route('bemkm.berita.index')
+            ->with(
+                'success',
+                'Berita berhasil dipublish'
+            );
     }
 
-    /**
-     * Form edit berita
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | EDIT
+    |--------------------------------------------------------------------------
+    */
+
     public function edit($id)
     {
         $berita = Berita::findOrFail($id);
 
-        return view('bemkm.berita.edit', compact('berita'));
+        return view(
+            'bemkm.berita.edit',
+            compact('berita')
+        );
     }
 
-    /**
-     * Update berita
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE
+    |--------------------------------------------------------------------------
+    */
+
     public function update(Request $request, $id)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
+
+            'judul' => 'required',
+
+            'kategori' => 'required',
+
             'isi' => 'required',
-            'kategori' => 'nullable|string|max:100',
+
         ]);
 
         $berita = Berita::findOrFail($id);
 
-        $berita->update([
-            'judul' => $request->judul,
-            'isi' => $request->isi,
-            'kategori' => $request->kategori,
-        ]);
+        /*
+        |--------------------------------------------------------------------------
+        | UPDATE THUMBNAIL
+        |--------------------------------------------------------------------------
+        */
 
-        return redirect()->route('berita.index')
-            ->with('success', 'Berita berhasil diupdate!');
+        if ($request->hasFile('thumbnail')) {
+
+            if ($berita->thumbnail) {
+
+                $oldPath = public_path(
+                    'uploads/berita/' . $berita->thumbnail
+                );
+
+                if (file_exists($oldPath)) {
+
+                    unlink($oldPath);
+
+                }
+            }
+
+            $thumbnail = $request->file('thumbnail');
+
+            $namaThumbnail = time() . '_' . $thumbnail->getClientOriginalName();
+
+            $thumbnail->move(
+                public_path('uploads/berita'),
+                $namaThumbnail
+            );
+
+            $berita->thumbnail = $namaThumbnail;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | UPDATE DATA
+        |--------------------------------------------------------------------------
+        */
+
+        $berita->judul = $request->judul;
+
+        $berita->slug = Str::slug($request->judul);
+
+        $berita->kategori = $request->kategori;
+
+        $berita->isi = $request->isi;
+
+        $berita->save();
+
+        return redirect()
+            ->route('bemkm.berita.index')
+            ->with(
+                'success',
+                'Berita berhasil diupdate'
+            );
     }
 
-    /**
-     * Hapus berita
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | DESTROY
+    |--------------------------------------------------------------------------
+    */
+
     public function destroy($id)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | CARI BERITA
+        |--------------------------------------------------------------------------
+        */
+
         $berita = Berita::findOrFail($id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | HAPUS THUMBNAIL
+        |--------------------------------------------------------------------------
+        */
+
+        if ($berita->thumbnail) {
+
+            $path = public_path(
+                'uploads/berita/' . $berita->thumbnail
+            );
+
+            if (file_exists($path)) {
+
+                unlink($path);
+
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | HAPUS DATA
+        |--------------------------------------------------------------------------
+        */
+
         $berita->delete();
 
-        return redirect()->route('berita.index')
-            ->with('success', 'Berita berhasil dihapus!');
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()
+            ->route('bemkm.berita.index')
+            ->with(
+                'success',
+                'Berita berhasil dihapus'
+            );
     }
 }

@@ -45,9 +45,16 @@
 
                 <div class="w-14 h-14 rounded-2xl bg-[#0B2B8A] flex items-center justify-center shadow-lg">
 
-                    <span class="text-2xl">
-                        🎓
-                    </span>
+                    <div class="w-20 h-20 rounded-[28px]
+            bg-white
+            shadow-xl
+            flex items-center justify-center overflow-hidden">
+
+    <img src="{{ asset('storage/logokabinet.png') }}"
+         alt="Logo UNRIYO"
+         class="w-16 h-16 object-contain">
+
+</div>
 
                 </div>
 
@@ -118,9 +125,21 @@
             <span class="text-sm font-medium">
                 LPJ
             </span>
+        <!-- SURAT -->
+        </a>
+        <a href="{{ route('bemkm.surat.index') }}"
+        class="flex items-center gap-4 px-5 py-4 rounded-2xl transition
+        {{ request()->routeIs('bemkm.surat.*') ? 'bg-[#1A46D3] border-l-4 border-[#FFD54A] shadow-lg' : 'hover:bg-white/10' }}">
+
+            <span class="text-2xl">
+                📩
+            </span>
+
+            <span class="font-medium">
+                Surat
+            </span>
 
         </a>
-
         <!-- BERITA -->
         <a href="{{ route('bemkm.berita.index') }}"
            class="flex items-center gap-4 px-5 py-4 rounded-2xl transition
@@ -160,20 +179,27 @@
 
         </a>
 
-        <!-- ORGANISASI -->
-        <a href="{{ route('bemkm.organisasi.index') }}"
-           class="flex items-center gap-4 px-5 py-4 rounded-2xl transition
-           {{ request()->routeIs('bemkm.organisasi.*') ? 'bg-[#1A46D3] border-l-4 border-[#FFD54A] shadow-lg' : 'hover:bg-white/10' }}">
+        <!-- LOGOUT -->
+<form method="POST"
+      action="{{ route('logout') }}"
+      class="pt-6 mt-6 border-t border-white/10">
 
-            <span>🏢</span>
+    @csrf
 
-            <span class="text-sm font-medium">
-                Organisasi
-            </span>
+    <button type="submit"
+            class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl bg-red-500 hover:bg-red-600 transition-all duration-300 shadow-lg">
 
-        </a>
+        <span class="text-xl">
+            ⎋
+        </span>
 
-    </div>
+        <span class="text-sm font-semibold">
+            Logout
+        </span>
+
+    </button>
+
+</form>
 
 </aside>
 
@@ -215,27 +241,33 @@
         </div>
 
         <!-- PROFILE -->
-        <div class="flex items-center gap-4">
+<div class="flex items-center gap-4">
 
-            <div class="hidden md:block text-right">
+    <!-- USER -->
+    <div class="hidden md:block text-right">
 
-                <h4 class="font-semibold text-[#041C64]">
-                    Administrator
-                </h4>
+        <h4 class="font-semibold text-[#041C64]">
 
-                <p class="text-sm text-gray-500">
-                    BEM KM
-                </p>
+            {{ auth()->user()->name }}
 
-            </div>
+        </h4>
 
-            <div class="w-12 h-12 rounded-full bg-[#1A46D3] text-white flex items-center justify-center font-bold">
+        <p class="text-sm text-gray-500">
 
-                A
+            {{ strtoupper(auth()->user()->role) }}
 
-            </div>
+        </p>
 
-        </div>
+    </div>
+
+    <!-- AVATAR -->
+    <div class="w-12 h-12 rounded-full bg-[#1A46D3] text-white flex items-center justify-center font-bold shadow-lg">
+
+        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+
+    </div>
+
+    
 
     </header>
 

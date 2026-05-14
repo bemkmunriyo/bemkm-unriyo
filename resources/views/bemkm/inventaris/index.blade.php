@@ -355,7 +355,7 @@
               onsubmit="return confirm('Yakin ingin menghapus inventaris ini?')">
 
             @csrf
-            @method('DELETE')
+            
 
             <button type="submit"
                     class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition">

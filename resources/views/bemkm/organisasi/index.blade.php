@@ -70,11 +70,16 @@
                 12
             </h2>
 
-            <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
+            <div class="w-20 h-20 rounded-[28px]
+            bg-white
+            shadow-xl
+            flex items-center justify-center overflow-hidden">
 
-                🎓
+    <img src="{{ asset('storage/logokabinet.png') }}"
+         alt="Logo UNRIYO"
+         class="w-16 h-16 object-contain">
 
-            </div>
+</div>
 
         </div>
 

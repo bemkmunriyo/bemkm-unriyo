@@ -2,6 +2,34 @@
 
 @section('content')
 
+@if(session('success'))
+
+<div class="mb-6 bg-green-100 border border-green-200 text-green-700 px-6 py-4 rounded-2xl shadow-sm">
+
+    <div class="flex items-center gap-3">
+
+        <span class="text-2xl">
+            ✅
+        </span>
+
+        <div>
+
+            <h3 class="font-semibold">
+                Berhasil
+            </h3>
+
+            <p class="text-sm">
+                {{ session('success') }}
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+@endif
+
 <!-- HEADER -->
 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-8">
 
@@ -20,13 +48,12 @@
     <!-- BUTTON -->
     <div>
 
-        <button
-            class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-6 py-3 rounded-2xl font-semibold shadow-sm transition">
+        <a href="{{ route('ormawaukm.surat.create') }}"
+   class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-6 py-3 rounded-2xl font-semibold shadow-sm transition">
 
-            + Ajukan Surat
+    + Ajukan Surat
 
-        </button>
-
+</a>
     </div>
 
 </div>
@@ -246,7 +273,7 @@
         <div>
 
             <h3 class="font-semibold text-[#041C64] text-lg">
-                {{ $surat->nama_kegiatan }}
+                {{ $surat->judul }}
             </h3>
 
             <p class="text-sm text-gray-500 mt-1">
@@ -280,7 +307,7 @@
                 Disetujui
             </span>
 
-        @elseif($surat->status == 'menunggu')
+        @elseif($surat->status == 'pending')
 
             <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-semibold">
                 Menunggu Verifikasi
@@ -299,7 +326,7 @@
     <!-- CATATAN -->
     <td class="px-6 py-5 text-gray-600">
 
-        {{ $surat->catatan ?? '-' }}
+        {{ $surat->deskripsi }}
 
     </td>
 

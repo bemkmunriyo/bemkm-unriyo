@@ -8,11 +8,11 @@
     <div>
 
         <h1 class="text-3xl font-bold text-[#041C64]">
-            LPJ Kegiatan
+            Laporan Pertanggungjawaban (LPJ)
         </h1>
 
         <p class="text-gray-500 mt-2">
-            Upload laporan pertanggungjawaban kegiatan organisasi mahasiswa.
+            Kelola dan pantau status LPJ kegiatan organisasi Anda.
         </p>
 
     </div>
@@ -20,12 +20,14 @@
     <!-- BUTTON -->
     <div>
 
-        <button
-            class="bg-[#1A46D3] hover:bg-[#1238B3] text-white px-6 py-3 rounded-2xl font-semibold shadow-sm transition">
+        <a href="{{ route('ormawaukm.lpj.create') }}"
+           class="bg-[#041C64] hover:bg-[#02113D]
+           text-white px-6 py-3 rounded-2xl
+           font-semibold shadow-sm transition">
 
             + Upload LPJ
 
-        </button>
+        </a>
 
     </div>
 
@@ -44,12 +46,41 @@
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-[#041C64]">
+
                 {{ $totalLpj }}
+
             </h2>
 
-            <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF] flex items-center justify-center text-2xl">
+            <div class="w-14 h-14 rounded-2xl bg-[#EEF3FF]
+                        flex items-center justify-center text-2xl">
 
-                📙
+                📘
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MENUNGGU -->
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+
+        <p class="text-sm text-gray-500">
+            Menunggu Verifikasi
+        </p>
+
+        <div class="flex justify-between items-center mt-4">
+
+            <h2 class="text-4xl font-bold text-yellow-500">
+
+                {{ $menunggu }}
+
+            </h2>
+
+            <div class="w-14 h-14 rounded-2xl bg-yellow-100
+                        flex items-center justify-center text-2xl">
+
+                ⏳
 
             </div>
 
@@ -61,16 +92,19 @@
     <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
 
         <p class="text-sm text-gray-500">
-            LPJ Disetujui
+            Disetujui
         </p>
 
         <div class="flex justify-between items-center mt-4">
 
             <h2 class="text-4xl font-bold text-green-500">
+
                 {{ $disetujui }}
+
             </h2>
 
-            <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
+            <div class="w-14 h-14 rounded-2xl bg-green-100
+                        flex items-center justify-center text-2xl">
 
                 ✅
 
@@ -84,96 +118,23 @@
     <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
 
         <p class="text-sm text-gray-500">
-            Revisi LPJ
+            Revisi / Ditolak
         </p>
 
         <div class="flex justify-between items-center mt-4">
 
-            <h2 class="text-4xl font-bold text-yellow-500">
+            <h2 class="text-4xl font-bold text-red-500">
+
                 {{ $revisi }}
+
             </h2>
 
-            <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-2xl">
+            <div class="w-14 h-14 rounded-2xl bg-red-100
+                        flex items-center justify-center text-2xl">
 
-                ✏️
+                ❌
 
             </div>
-
-        </div>
-
-    </div>
-
-    <!-- MENUNGGU -->
-<div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-
-    <p class="text-sm text-gray-500">
-        Menunggu Verifikasi
-    </p>
-
-    <div class="flex justify-between items-center mt-4">
-
-        <h2 class="text-4xl font-bold text-blue-500">
-            {{ $menunggu }}
-        </h2>
-
-        <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">
-
-            ⏳
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-<!-- FILTER -->
-<div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-8">
-
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-
-        <!-- SEARCH -->
-        <div class="md:col-span-2">
-
-            <label class="block text-sm font-semibold text-gray-700 mb-3">
-                Cari LPJ
-            </label>
-
-            <input type="text"
-                   placeholder="Cari nama kegiatan..."
-                   class="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-blue-200">
-
-        </div>
-
-        <!-- STATUS -->
-        <div>
-
-            <label class="block text-sm font-semibold text-gray-700 mb-3">
-                Status LPJ
-            </label>
-
-            <select
-                class="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-blue-200">
-
-                <option>Semua Status</option>
-                <option>Disetujui</option>
-                <option>Revisi</option>
-                <option>Menunggu Verifikasi</option>
-
-            </select>
-
-        </div>
-
-        <!-- BUTTON -->
-        <div class="flex items-end">
-
-            <button
-                class="w-full bg-[#041C64] hover:bg-[#02113D] text-white py-4 rounded-2xl font-semibold transition">
-
-                Filter Data
-
-            </button>
 
         </div>
 
@@ -184,15 +145,15 @@
 <!-- TABLE -->
 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
 
-    <!-- HEADER -->
+    <!-- HEADER TABLE -->
     <div class="px-6 py-5 border-b border-gray-100">
 
         <h2 class="text-2xl font-bold text-[#041C64]">
-            Riwayat LPJ Kegiatan
+            Daftar LPJ Saya
         </h2>
 
         <p class="text-sm text-gray-500 mt-1">
-            Riwayat laporan pertanggungjawaban organisasi mahasiswa
+            Semua LPJ yang telah Anda upload.
         </p>
 
     </div>
@@ -202,140 +163,142 @@
 
         <table class="w-full">
 
+            <!-- HEAD -->
             <thead class="bg-gray-50">
 
                 <tr>
 
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Nama Kegiatan
+                    <th class="text-left px-6 py-4 font-bold text-[#041C64]">
+                        Kegiatan
                     </th>
 
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Realisasi Anggaran
-                    </th>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Tanggal Upload
-                    </th>
-
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
+                    <th class="text-left px-6 py-4 font-bold text-[#041C64]">
                         Status
                     </th>
 
-                    <th class="text-left px-6 py-4 text-sm font-semibold text-gray-500">
-                        Catatan DPM/BEM
+                    <th class="text-left px-6 py-4 font-bold text-[#041C64]">
+                        Tanggal Upload
                     </th>
 
-                    <th class="text-center px-6 py-4 text-sm font-semibold text-gray-500">
-                        Aksi
+                    <th class="text-left px-6 py-4 font-bold text-[#041C64]">
+                        File LPJ
                     </th>
 
                 </tr>
 
             </thead>
 
+            <!-- BODY -->
             <tbody>
 
-@forelse($lpjs as $lpj)
+                @forelse($lpjs as $lpj)
 
-<tr class="border-t hover:bg-gray-50 transition">
+                <tr class="border-t hover:bg-gray-50 transition">
 
-    <!-- KEGIATAN -->
-    <td class="px-6 py-5">
+                    <!-- KEGIATAN -->
+                    <td class="px-6 py-5">
 
-        <div>
+                        <h3 class="font-semibold text-[#041C64]">
 
-            <h3 class="font-semibold text-[#041C64] text-lg">
-                {{ $lpj->judul }}
-            </h3>
+                            {{ $lpj->judul }}
 
-            <p class="text-sm text-gray-500 mt-1">
-                {{ $lpj->deskripsi }}
-            </p>
+                        </h3>
 
-        </div>
+                        <p class="text-sm text-gray-500 mt-1">
 
-    </td>
+                            {{ $lpj->deskripsi }}
 
-    <!-- ANGGARAN -->
-    <td class="px-6 py-5 font-semibold text-[#041C64]">
+                        </p>
 
-        -
+                    </td>
 
-    </td>
+                    <!-- STATUS -->
+                    <td class="px-6 py-5">
 
-    <!-- TANGGAL -->
-    <td class="px-6 py-5 text-gray-500">
+                        @if($lpj->status == 'disetujui')
 
-        {{ \Carbon\Carbon::parse($lpj->created_at)->translatedFormat('d F Y') }}
+                            <span class="bg-green-100 text-green-700
+                                         px-4 py-2 rounded-full
+                                         text-xs font-semibold">
 
-    </td>
+                                Disetujui
 
-    <!-- STATUS -->
-    <td class="px-6 py-5">
+                            </span>
 
-        @if($lpj->status == 'disetujui')
+                        @elseif($lpj->status == 'revisi')
 
-            <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-semibold">
-                Disetujui
-            </span>
+                            <span class="bg-yellow-100 text-yellow-700
+                                         px-4 py-2 rounded-full
+                                         text-xs font-semibold">
 
-        @elseif($lpj->status == 'revisi')
+                                Revisi
 
-            <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-semibold">
-                Revisi LPJ
-            </span>
+                            </span>
 
-        @else
+                        @elseif($lpj->status == 'ditolak')
 
-            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-semibold">
-                Menunggu Verifikasi
-            </span>
+                            <span class="bg-red-100 text-red-700
+                                         px-4 py-2 rounded-full
+                                         text-xs font-semibold">
 
-        @endif
+                                Ditolak
 
-    </td>
+                            </span>
 
-    <!-- CATATAN -->
-    <td class="px-6 py-5 text-gray-600">
+                        @else
 
-        {{ $lpj->catatan ?? '-' }}
+                            <span class="bg-blue-100 text-blue-700
+                                         px-4 py-2 rounded-full
+                                         text-xs font-semibold">
 
-    </td>
+                                Pending
 
-    <!-- AKSI -->
-    <td class="px-6 py-5">
+                            </span>
 
-        <div class="flex items-center justify-center gap-3">
+                        @endif
 
-            <a href="#"
-               class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold transition">
+                    </td>
 
-                Detail
+                    <!-- TANGGAL -->
+                    <td class="px-6 py-5 text-gray-500">
 
-            </a>
+                        {{ $lpj->created_at->format('d M Y') }}
 
-        </div>
+                    </td>
 
-    </td>
+                    <!-- FILE -->
+                    <td class="px-6 py-5">
 
-</tr>
+                        <a href="{{ asset('uploads/lpj/' . $lpj->file) }}"
+                           target="_blank"
+                           class="bg-green-100 hover:bg-green-200
+                           text-green-700 px-4 py-2 rounded-xl
+                           text-sm font-semibold transition">
 
-@empty
+                            Download
 
-<tr>
+                        </a>
 
-    <td colspan="6" class="text-center py-10 text-gray-500">
+                    </td>
 
-        Belum ada upload LPJ.
+                </tr>
 
-    </td>
+                @empty
 
-</tr>
+                <tr>
 
-@endforelse
+                    <td colspan="4"
+                        class="text-center py-10 text-gray-500">
 
-</tbody>
+                        Belum ada LPJ diupload.
+
+                    </td>
+
+                </tr>
+
+                @endforelse
+
+            </tbody>
 
         </table>
 

@@ -137,21 +137,23 @@
 
                                 <!-- DELETE -->
                                 <form action="{{ route('superadmin.akun.destroy', $user->id) }}"
-                                      method="POST">
+      method="POST"
+      onsubmit="return confirm('Yakin ingin menghapus akun ini?')">
 
-                                    @csrf
-                                    @method('DELETE')
+    @csrf
+    @method('DELETE')
 
-                                    <button
-                                        onclick="return confirm('Hapus akun ini?')"
-                                        class="bg-red-100 hover:bg-red-200
-                                        text-red-700 px-4 py-2 rounded-xl font-semibold">
+    <button type="submit"
+            class="bg-red-100 hover:bg-red-200
+                   text-red-700 px-4 py-2
+                   rounded-xl font-semibold
+                   transition duration-200">
 
-                                        Hapus
+        Hapus
 
-                                    </button>
+    </button>
 
-                                </form>
+</form>
 
                             </div>
 

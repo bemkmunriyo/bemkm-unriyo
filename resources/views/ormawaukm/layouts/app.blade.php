@@ -47,9 +47,14 @@
 
                 <div class="w-14 h-14 rounded-2xl bg-[#0B2B8A] flex items-center justify-center shadow-lg">
 
-                    <span class="text-2xl">
-                        🎓
-                    </span>
+                    <div class="w-20 h-20
+            flex items-center justify-center">
+
+    <img src="{{ asset('storage/logokabinet.png') }}"
+         alt="Logo UNRIYO"
+         class="w-20 h-20 object-contain">
+
+</div>
 
                 </div>
 

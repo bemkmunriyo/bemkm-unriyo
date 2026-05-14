@@ -155,7 +155,8 @@
 
 
 <!-- STRUKTUR ORGANISASI -->
-<section class="py-14 bg-gradient-to-b from-slate-50 to-white">
+<section id="kementerian"
+         class="py-14 bg-gradient-to-b from-slate-50 to-white">
 
     <div class="max-w-6xl mx-auto px-5">
 
@@ -584,9 +585,14 @@
             <!-- ITEM -->
             <div class="flex gap-5 p-6 hover:bg-slate-50 duration-300">
 
-                <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl shrink-0">
-                    🎓
-                </div>
+                <div class="w-20 h-20
+            flex items-center justify-center">
+
+    <img src="{{ asset('storage/logokabinet.png') }}"
+         alt="Logo UNRIYO"
+         class="w-20 h-20 object-contain">
+
+</div>
 
                 <div>
 

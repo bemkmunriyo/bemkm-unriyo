@@ -64,11 +64,17 @@
 
             <div class="flex items-center gap-4 mb-5">
 
-                <div class="w-14 h-14 rounded-2xl bg-amber-400 flex items-center justify-center text-2xl shadow-lg">
+                <div class="w-14 h-14 rounded-2xl
+                        bg-white
+                        p-2
+                        shadow-lg
+                        flex items-center justify-center">
 
-                    🎓
+                <img src="{{ asset('storage/logo-unriyo.png') }}"
+                    alt="Logo UNRIYO"
+                    class="w-full h-full object-contain">
 
-                </div>
+            </div>
 
                 <div>
 
