@@ -20,7 +20,7 @@
 
 .berita-container{
 
-    max-width:850px;
+    max-width:900px;
     margin:auto;
 
 }
@@ -46,11 +46,15 @@
 
     width:100%;
 
-    height:420px;
+    background:#F1F5F9;
 
-    overflow:hidden;
+    display:flex;
 
-    background:#E5E7EB;
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
 
 }
 
@@ -58,11 +62,15 @@
 
     width:100%;
 
-    height:100%;
+    max-height:500px;
 
-    object-fit:cover;
+    object-fit:contain;
+
+    border-radius:20px;
 
     display:block;
+
+    background:white;
 
 }
 
@@ -92,6 +100,8 @@
     font-weight:700;
 
     box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+    z-index:10;
 
 }
 
@@ -219,6 +229,16 @@
 
 }
 
+.berita-isi img{
+
+    max-width:100%;
+
+    border-radius:18px;
+
+    margin:20px 0;
+
+}
+
 /*
 |--------------------------------------------------------------------------
 | FOOTER
@@ -311,21 +331,41 @@
 
 @media(max-width:768px){
 
+    .berita-wrapper{
+
+        padding:30px 14px;
+
+    }
+
     .berita-content{
 
-        padding:28px;
+        padding:24px;
 
     }
 
     .berita-title{
 
-        font-size:30px;
+        font-size:28px;
+
+        margin-bottom:25px;
+
+    }
+
+    .berita-thumbnail{
+
+        padding:14px;
 
     }
 
     .berita-thumbnail img{
 
-    max-height:180px;
+        max-height:280px;
+
+    }
+
+    .berita-meta{
+
+        gap:24px;
 
     }
 
@@ -353,10 +393,11 @@
 
             <div class="berita-thumbnail">
 
-                <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}">
+                <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
+                     alt="{{ $berita->judul }}"
+                     loading="lazy">
 
-                <div class="berita-overlay"></div>
-
+                <!-- KATEGORI -->
                 <div class="berita-kategori">
 
                     {{ $berita->kategori }}

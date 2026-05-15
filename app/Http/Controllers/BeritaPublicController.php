@@ -16,16 +16,13 @@ class BeritaPublicController extends Controller
     {
         /*
         |--------------------------------------------------------------------------
-        | AMBIL BERITA PUBLISHED
+        | AMBIL SEMUA BERITA PUBLISHED
         |--------------------------------------------------------------------------
         */
 
-        $beritas = Berita::where(
-            'status',
-            'published'
-        )
-        ->latest()
-        ->get();
+        $beritas = Berita::where('status', 'published')
+            ->latest()
+            ->get();
 
         /*
         |--------------------------------------------------------------------------
@@ -33,17 +30,11 @@ class BeritaPublicController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $pengumuman = Berita::where(
-            'kategori',
-            'Pengumuman'
-        )
-        ->where(
-            'status',
-            'published'
-        )
-        ->latest()
-        ->take(3)
-        ->get();
+        $pengumuman = Berita::where('kategori', 'Pengumuman')
+            ->where('status', 'published')
+            ->latest()
+            ->take(3)
+            ->get();
 
         /*
         |--------------------------------------------------------------------------
@@ -51,13 +42,10 @@ class BeritaPublicController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        return view(
-            'berita.index',
-            compact(
-                'beritas',
-                'pengumuman'
-            )
-        );
+        return view('berita.index', compact(
+            'beritas',
+            'pengumuman'
+        ));
     }
 
     /*
@@ -70,19 +58,14 @@ class BeritaPublicController extends Controller
     {
         /*
         |--------------------------------------------------------------------------
-        | CARI BERITA BERDASARKAN SLUG
+        | AMBIL DETAIL BERITA
         |--------------------------------------------------------------------------
         */
 
-        $berita = Berita::where(
-            'slug',
-            $slug
-        )
-        ->where(
-            'status',
-            'published'
-        )
-        ->firstOrFail();
+        $berita = Berita::with('penulis')
+            ->where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
 
         /*
         |--------------------------------------------------------------------------
@@ -90,9 +73,6 @@ class BeritaPublicController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        return view(
-            'berita.detail',
-            compact('berita')
-        );
+        return view('berita.detail', compact('berita'));
     }
 }

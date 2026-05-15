@@ -158,7 +158,6 @@
 
                             @empty
 
-                            <!-- EMPTY -->
                             <div class="text-center py-10">
 
                                 <div class="text-5xl mb-4">
@@ -170,9 +169,7 @@
                                 </h4>
 
                                 <p class="text-slate-500 mt-2 text-sm">
-
                                     Berita kategori pengumuman akan tampil otomatis di sini.
-
                                 </p>
 
                             </div>
@@ -200,19 +197,11 @@
             <div class="text-center mb-14">
 
                 <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-900 px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
-
                     Berita Kampus
-
                 </div>
 
-                <h2 class="text-3xl lg:text-4xl
-                           font-black
-                           text-slate-900
-                           mt-4">
-
-                    Informasi &
-                    Aktivitas Mahasiswa
-
+                <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mt-4">
+                    Informasi & Aktivitas Mahasiswa
                 </h2>
 
                 <p class="text-slate-500 text-lg mt-5 max-w-3xl mx-auto leading-relaxed">
@@ -245,7 +234,7 @@
 
                         @if($berita->thumbnail)
 
-                        <img src="{{ asset('storage/berita/' . $berita->thumbnail) }}"
+                        <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
                              alt="{{ $berita->judul }}"
                              loading="lazy"
                              class="w-full h-[220px]
@@ -290,14 +279,10 @@
                     <!-- CONTENT -->
                     <div class="p-5">
 
-                        <!-- DATE -->
                         <p class="text-xs text-slate-400">
-
                             {{ $berita->created_at->format('d M Y') }}
-
                         </p>
 
-                        <!-- TITLE -->
                         <h3 class="text-lg
                                    font-bold
                                    text-slate-900
@@ -309,7 +294,6 @@
 
                         </h3>
 
-                        <!-- DESC -->
                         <p class="text-sm
                                   text-slate-500
                                   leading-relaxed
@@ -320,7 +304,6 @@
 
                         </p>
 
-                        <!-- FOOTER -->
                         <div class="mt-5">
 
                             <a href="{{ route('public.berita.detail', $berita->slug) }}"
@@ -344,11 +327,9 @@
 
                 @empty
 
-                <!-- EMPTY -->
                 <div class="col-span-full">
 
-                    <div class="bg-white
-                                rounded-[28px]
+                    <div class="bg-white rounded-[28px]
                                 border border-slate-100
                                 p-12 text-center">
 
@@ -357,16 +338,11 @@
                         </div>
 
                         <h3 class="text-3xl font-black text-slate-900">
-
                             Belum Ada Berita
-
                         </h3>
 
                         <p class="text-slate-500 mt-4 max-w-lg mx-auto">
-
-                            Berita yang dipublikasikan dari dashboard
-                            akan tampil otomatis di halaman ini.
-
+                            Berita yang dipublikasikan dari dashboard akan tampil otomatis di halaman ini.
                         </p>
 
                     </div>
