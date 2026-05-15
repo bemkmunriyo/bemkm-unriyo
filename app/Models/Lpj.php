@@ -11,14 +11,13 @@ class Lpj extends Model
 
     protected $fillable = [
 
-    'user_id',
-    'judul',
-    'deskripsi',
-    'tanggal',
-    'file',
-    'status',
+        'user_id',
+        'judul',
+        'deskripsi',
+        'file',
+        'status',
 
-];
+    ];
 
     /*
     |--------------------------------------------------------------------------
