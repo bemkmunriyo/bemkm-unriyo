@@ -110,7 +110,6 @@
 
                             @forelse($pengumuman as $item)
 
-                            <!-- ITEM -->
                             <a href="{{ route('public.berita.detail', $item->slug) }}"
                                class="group flex items-start gap-4
                                       p-5 rounded-3xl
@@ -234,7 +233,7 @@
 
                         @if($berita->thumbnail)
 
-                        <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
+                        <img src="{{ url('public/upload/berita/' . $berita->thumbnail) }}"
                              alt="{{ $berita->judul }}"
                              loading="lazy"
                              class="w-full h-[220px]

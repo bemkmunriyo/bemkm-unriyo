@@ -393,7 +393,7 @@
 
             <div class="berita-thumbnail">
 
-                <img src="{{ asset('uploads/berita/' . $berita->thumbnail) }}"
+                <img src="{{ url('public/upload/berita/' . $berita->thumbnail) }}"
                      alt="{{ $berita->judul }}"
                      loading="lazy">
 

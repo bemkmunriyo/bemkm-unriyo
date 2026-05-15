@@ -20,7 +20,8 @@ class BeritaPublicController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $beritas = Berita::where('status', 'published')
+        $beritas = Berita::with('penulis')
+            ->where('status', 'published')
             ->latest()
             ->get();
 
@@ -30,7 +31,8 @@ class BeritaPublicController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $pengumuman = Berita::where('kategori', 'Pengumuman')
+        $pengumuman = Berita::with('penulis')
+            ->where('kategori', 'Pengumuman')
             ->where('status', 'published')
             ->latest()
             ->take(3)
