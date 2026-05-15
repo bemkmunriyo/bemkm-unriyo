@@ -36,7 +36,7 @@
                 </label>
 
                 <input type="text"
-                       name="judul"
+                       name="nama_kegiatan"
                        placeholder="Masukkan nama kegiatan"
                        class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-200 outline-none">
 
@@ -50,25 +50,9 @@
                 </label>
 
                 <input type="text"
-                       name="organisasi"
                        value="{{ auth()->user()->name }}"
                        readonly
                        class="w-full bg-gray-100 border border-gray-300 rounded-2xl px-5 py-4">
-
-            </div>
-
-            
-
-            <!-- TANGGAL -->
-            <div>
-
-                <label class="block mb-2 font-semibold text-gray-700">
-                    Tanggal
-                </label>
-
-                <input type="date"
-                       name="tanggal"
-                       class="w-full border border-gray-300 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-200 outline-none">
 
             </div>
 
